@@ -2,6 +2,8 @@ import "./style/main.styl"
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import Piano from "./javascript/Piano.js"
+import Guitar from "./javascript/Piano.js"
+
 
 /**
  * Sizes
@@ -42,6 +44,11 @@ scene.add(ambientLight)
 
 const piano = new Piano()
 scene.add(piano.group)
+
+// //  Guitar
+
+// const guitar = new Guitar()
+// scene.add(guitar.group)
 
 // const raycaster = new THREE.Raycaster()
 /**
