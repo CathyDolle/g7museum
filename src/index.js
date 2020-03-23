@@ -46,9 +46,10 @@ scene.add(camera)
 /**
  * Renderer
  */
-const renderer = new THREE.WebGLRenderer()
+const renderer = new THREE.WebGLRenderer({ alpha: true })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(window.devicePixelRatio)
+renderer.setClearAlpha(0)
 document.body.appendChild(renderer.domElement)
 
 /**
@@ -77,18 +78,6 @@ window.addEventListener("resize", () => {
  */
 const loop = () => {
   window.requestAnimationFrame(loop)
-  // Camera
-  // camera.position.y = - cursor.y * 5
-  // camera.position.x = cursor.x * 5
-
-  // const angle = cursor.x * Math.PI * 2
-  // camera.position.x = Math.cos(angle) * 3
-  // camera.position.z = Math.sin(angle) * 3
-  // camera.position.y = cursor.y * 5
-
-  // camera.lookAt(scene.position)
-
-  // Camera controls
   cameraControls.update()
 
   // Render
