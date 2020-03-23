@@ -1,6 +1,7 @@
 import "./style/main.styl"
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
+import Piano from "./javascript/Piano.js"
 
 /**
  * Sizes
@@ -37,18 +38,24 @@ scene.add(ambientLight)
  * Objects
  */
 
+//  PIANO
+
+const piano = new Piano()
+scene.add(piano.group)
+
+// const raycaster = new THREE.Raycaster()
 /**
  * GroundFloor
  */
-const groundFloorGroup = new THREE.Group()
-scene.add(groundFloorGroup)
+// const groundFloorGroup = new THREE.Group()
+// scene.add(groundFloorGroup)
 
-const walls = new THREE.Mesh(
-  new THREE.BoxGeometry(5, 2.5, 5, 1, 1, 1),
-  new THREE.MeshStandardMaterial({ color: 0xe8c7d6 })
-)
-walls.position.y = 1.25
-groundFloorGroup.add(walls)
+// const walls = new THREE.Mesh(
+//   new THREE.BoxGeometry(5, 2.5, 5, 1, 1, 1),
+//   new THREE.MeshStandardMaterial({ color: 0xe8c7d6 })
+// )
+// walls.position.y = 1.25
+// groundFloorGroup.add(walls)
 
 /**
  * Camera
@@ -59,7 +66,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   20
 )
-camera.position.z = 8
+camera.position.z = 1
 scene.add(camera)
 
 /**
@@ -93,11 +100,43 @@ window.addEventListener("resize", () => {
 })
 
 /**
+ * Click on piano
+ */
+let hoverPiano = false
+document.addEventListener("click", () => {
+  if (hoverPiano) {
+    console.log("click sur le canard")
+
+    TweenLite.to(piano.piano.position, 1, {
+      y: piano.piano.position.y - 1,
+      x: piano.piano.position.x - 1,
+      ease: "Power3.easeInOut"
+    })
+
+    TweenLite.to(piano.piano.rotation, 1, {
+      y: Math.PI,
+      ease: "Power3.easeInOut"
+    })
+  }
+})
+
+/**
  * Loop
  */
 const loop = () => {
   window.requestAnimationFrame(loop)
   cameraControls.update()
+
+  // Cursor raycasting
+  // const raycasterCursor = new THREE.Vector2(cursor.x * 2, -cursor.y * 2)
+  // raycaster.setFromCamera(raycasterCursor, camera)
+
+  // const intersects = raycaster.intersectObject(piano.group, true)
+  // if (intersects.length) {
+  //   hoverPiano = true
+  // } else {
+  //   hoverPiano = false
+  // }
 
   // Render
   renderer.render(scene, camera)
@@ -105,26 +144,26 @@ const loop = () => {
 
 loop()
 
-
 /**
  * CURSOR
  */
 
-const container = document.getElementById('cursor')
-const cursorCustom = container.querySelector('.cursor-wrapper')
-const pointer = container.querySelector('.pointer')
-let cursorPos = { x: 0, y: 0 }
-let cursorOffset = { x: 0, y: 0 }
+// const container = document.getElementById("cursor")
+// const cursorCustom = container.querySelector(".cursor-wrapper")
+// const pointer = container.querySelector(".pointer")
+// let cursorPos = { x: 0, y: 0 }
+// let cursorOffset = { x: 0, y: 0 }
 
-function syncCursor(elem = cursorCustom) {
-	const transform = `translate(${cursorPos.x + cursorOffset.x}px, ${cursorPos.y + cursorOffset.y}px)`
-  
-  elem.style.transform = transform
-}
+// function syncCursor(elem = cursorCustom) {
+//   const transform = `translate(${cursorPos.x +
+//     cursorOffset.x}px, ${cursorPos.y + cursorOffset.y}px)`
 
-document.addEventListener('mousemove', e => {
-	cursorPos.x = e.clientX
-  cursorPos.y = e.clientY
-  syncCursor()
-  syncCursor(pointer)
-})
+//   elem.style.transform = transform
+// }
+
+// document.addEventListener("mousemove", e => {
+//   cursorPos.x = e.clientX
+//   cursorPos.y = e.clientY
+//   syncCursor()
+//   syncCursor(pointer)
+// })
