@@ -1,13 +1,46 @@
 html
+    scroll-behavior: smooth;
 
-*{
+*
     margin 0
     padding 0
-}
+
 
 body 
     overflow hidden
     pointer-events none
+
+
+/**
+ * CURSOR
+ */
+
+.cursor-container 
+  .pointer 
+    width 5pt
+    height 5pt
+    background black;
+    border-radius 50%
+    position absolute
+    top -2.5pt
+    left -2.5pt
+    transform translate(0, 0)
+    transition all 0.05s ease
+  .cursor-wrapper 
+    // z-index: 1;
+    position absolute
+    top -15pt
+    left -15pt
+    transform translate(0, 0)
+    width 30pt
+    height 30pt
+    transition all 0.1s ease
+    .cursor 
+      width 30pt
+      height 30pt
+      border 1pt solid black
+      border-radius 50%
+ 
 
 /**
  * CANVAS
@@ -54,11 +87,12 @@ body
     height 100vh
     display flex
     flex-direction column
-    justify-content center
+    justify-content space-around
     align-items center
 
-    h1 
+    a 
         font-family 'Work Sans', sans-serif;
         font-size 30px
         text-transform uppercase
-        color black
+        font-weight 800
+        color white
