@@ -21,7 +21,6 @@ window.addEventListener('mousemove', (_event) => {
     cursor.y = _event.clientY / sizes.height - 0.5
 })
 
-
 /**
  * Scene
  */

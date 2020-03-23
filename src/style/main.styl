@@ -1,15 +1,45 @@
 html
+
+*{
+    margin 0
+    padding 0
+}
+
 body 
-   position absolute
+    position relative
     top 0
     left 0
-    width 100%
-    height 100%
+    width 100vw
+    height 100vh
     overflow hidden
 
+/**
+ * CANVAS
+ */
 canvas
     position absolute
     top 0
     left 0
-    background-color white
+    pointer-events auto
+
+/*
+ * CONTAINER MENU
+ */
+
+.container
+    box-sizing border-box
+    padding 20px
+    width 100vw
+    height 100vh
+    display flex
+    justify-content center
+    align-items center
+
+    h1 
+        font-family 'Work Sans', sans-serif;
+        font-size 200px
+        text-transform uppercase
+        color #E8C7D640 
+        line-height 200px
+
 
