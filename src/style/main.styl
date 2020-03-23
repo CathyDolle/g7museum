@@ -6,27 +6,32 @@ html
 }
 
 body 
-    position relative
-    top 0
-    left 0
-    width 100vw
-    height 100vh
     overflow hidden
+    pointer-events none
 
 /**
  * CANVAS
  */
-canvas
+.canvas
+    z-index -1
     position absolute
     top 0
     left 0
-    pointer-events auto
+    width 100vw
+    height 100vh
+    canvas
+        position absolute
+        top 0
+        left 0
+        pointer-events auto
 
 /*
  * CONTAINER MENU
  */
 
-.container
+.background
+    z-index -2
+    position absolute
     box-sizing border-box
     padding 20px
     width 100vw
@@ -39,7 +44,21 @@ canvas
         font-family 'Work Sans', sans-serif;
         font-size 200px
         text-transform uppercase
-        color #E8C7D640 
+        color #E8C7D630 
         line-height 200px
 
+.menu
+    box-sizing border-box
+    padding 20px
+    width 100vw
+    height 100vh
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
 
+    h1 
+        font-family 'Work Sans', sans-serif;
+        font-size 30px
+        text-transform uppercase
+        color black

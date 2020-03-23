@@ -49,7 +49,8 @@ const renderer = new THREE.WebGLRenderer({ alpha: true })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setClearAlpha(0)
-document.body.appendChild(renderer.domElement)
+const canvasContainer = document.querySelector('.canvas-js')
+canvasContainer.appendChild(renderer.domElement)
 
 /**
  * Camera Controls
