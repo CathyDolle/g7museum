@@ -15,7 +15,7 @@ export default class Box {
     gltfLoader.load("/models/box/box.gltf", _gltf => {
       console.log(_gltf.scene)
       this.box = _gltf.scene.children[0]
-      this.box.scale.set(0.2, 0.2, 0.2)
+      this.box.scale.set(1, 1, 1)
 
       this.group.add(this.box)
     })

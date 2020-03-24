@@ -34,8 +34,13 @@ const scene = new THREE.Scene()
  * Lights
  */
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+const ambientLight = new THREE.AmbientLight(0xE8C7D6, 1)
 scene.add(ambientLight)
+
+const rectAreaLight = new THREE.RectAreaLight(0xE8C7D6, 3, 5, 5)
+rectAreaLight.position.set(5, - 3, 5)
+rectAreaLight.lookAt(scene.position)
+scene.add(rectAreaLight)
 
 /**
  * Objects
