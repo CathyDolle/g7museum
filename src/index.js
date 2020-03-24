@@ -6,18 +6,6 @@ import Guitar from "./javascript/Piano.js"
 import Box from "./javascript/Box.js"
 import { Mesh } from "three"
 
-// START
-
-const startModal = document.querySelector('.start-js')
-const startButton = document.querySelector('.start-button-js')
-
-startButton.addEventListener('click', () =>{
-  startModal.classList.add('fadeOut')
-})
-
-startModal.addEventListener("animationend", () =>{
-  startModal.classList.add('hidden')
-});
 /**
  * Sizes
  */
@@ -46,48 +34,43 @@ const scene = new THREE.Scene()
  * Lights
  */
 
-const ambientlight = new THREE.AmbientLight( 0xffffff, 0.2 ); // soft white light
+const ambientlight = new THREE.AmbientLight(0xffffff, 0.2) // soft white light
 ambientlight.castShadow = true
-scene.add( ambientlight );
+scene.add(ambientlight)
 
-var pianoLight = new THREE.PointLight( 0x8B84E5, 1);
-pianoLight.position.set( 0, 0, 0 );
+var pianoLight = new THREE.PointLight(0x8b84e5, 1)
+pianoLight.position.set(0, 0, 0)
 pianoLight.castShadow = true
 
-scene.add( pianoLight );
-
+scene.add(pianoLight)
 
 // var directionalRightLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
 // directionalRightLight.position.set( 5, 5, 0 );
 // directionalRightLight.castShadow = true
 // scene.add( directionalRightLight );
 
-var directionalLeftLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-directionalLeftLight.position.set( -5, 5, 0 );
+var directionalLeftLight = new THREE.DirectionalLight(0xffffff, 0.5)
+directionalLeftLight.position.set(-5, 5, 0)
 directionalLeftLight.castShadow = true
-scene.add( directionalLeftLight );
-
-
+scene.add(directionalLeftLight)
 
 // var directionalBackLight = new THREE.DirectionalLight( 0xffffff, 0.4 );
 // directionalBackLight.position.set( 0, 5, -5 );
 // directionalBackLight.castShadow = true
 // scene.add( directionalBackLight );
 
-var directionalFrontLight = new THREE.DirectionalLight( 0xffffff, 0.3);
-directionalFrontLight.position.set( 0, 0, 10 );
+var directionalFrontLight = new THREE.DirectionalLight(0xffffff, 0.3)
+directionalFrontLight.position.set(0, 0, 10)
 directionalFrontLight.castShadow = true
-scene.add( directionalFrontLight );
+scene.add(directionalFrontLight)
 
 const pointLight = new THREE.PointLight(0xff0000, 0.5)
 scene.add(pointLight)
 
-var directionalFrontLight = new THREE.DirectionalLightHelper(  directionalFrontLight );
-scene.add(  directionalFrontLight );
-
-
-
-
+var directionalFrontLight = new THREE.DirectionalLightHelper(
+  directionalFrontLight
+)
+scene.add(directionalFrontLight)
 
 /**
  * Objects
@@ -231,3 +214,41 @@ loop()
 //   syncCursor()
 //   syncCursor(pointer)
 // })
+
+/**
+ * Start
+ */
+
+const startModal = document.querySelector(".start-js")
+const startButton = document.querySelector(".start-button-js")
+
+startModal.addEventListener("animationend", () => {
+  startModal.classList.add("hidden")
+})
+
+startButton.addEventListener("click", () => {
+  start()
+  startModal.classList.add("fadeOut")
+})
+
+// SOUND
+import pianoAudio from "./audio/piano.wav"
+import guitarAudio from "./audio/guitar.wav"
+import bassAudio from "./audio/bass.wav"
+// import guitarAudio from './../audio/guitar.mp3'
+const pianoAudioInstance = new Audio()
+pianoAudioInstance.src = pianoAudio
+
+const guitarAudioInstance = new Audio()
+guitarAudioInstance.src = guitarAudio
+
+const bassAudioInstance = new Audio()
+bassAudioInstance.src = bassAudio
+
+const start = () => {
+  console.log("yo")
+  guitarAudioInstance.play()
+  bassAudioInstance.play()
+  pianoAudioInstance.play()
+  // guitarAudio.play()
+}
