@@ -243,21 +243,28 @@ import drumsKickAudio from "./audio/drumsKick.wav"
 
 const pianoAudioInstance = new Audio()
 pianoAudioInstance.src = pianoAudio
+pianoAudioInstance.loop = true
 
 const guitarAudioInstance = new Audio()
 guitarAudioInstance.src = guitarAudio
+guitarAudioInstance.loop = true
 
 const bassAudioInstance = new Audio()
 bassAudioInstance.src = bassAudio
+bassAudioInstance.loop = true
+
 // DRUMS
 const drumsAudioInstance = new Audio()
 drumsAudioInstance.src = drumsAudio
+drumsAudioInstance.loop = true
 
 const drumsKickAudioInstance = new Audio()
 drumsKickAudioInstance.src = drumsKickAudio
+drumsKickAudioInstance.loop = true
 
 const drumsPercAudioInstance = new Audio()
 drumsPercAudioInstance.src = drumsPercAudio
+drumsPercAudioInstance.loop = true
 
 const start = () => {
   console.log("yo")
