@@ -3,6 +3,7 @@ import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import Piano from "./javascript/Piano.js"
 import Guitar from "./javascript/Piano.js"
+import Box from "./javascript/box.js"
 
 
 /**
@@ -39,11 +40,12 @@ scene.add(ambientLight)
 /**
  * Objects
  */
+const box = new Box()
+scene.add(box.group)
+// //  PIANO
 
-//  PIANO
-
-const piano = new Piano()
-scene.add(piano.group)
+// const piano = new Piano()
+// scene.add(piano.group)
 
 // //  Guitar
 
@@ -73,7 +75,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   20
 )
-camera.position.z = 1
+camera.position.z = 3
 scene.add(camera)
 
 /**
