@@ -3,7 +3,7 @@ import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import Piano from "./javascript/Piano.js"
 import Guitar from "./javascript/Piano.js"
-import Box from "./javascript/box.js"
+import Box from "./javascript/Box.js"
 
 
 /**
