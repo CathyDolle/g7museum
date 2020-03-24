@@ -235,6 +235,7 @@ startButton.addEventListener("click", () => {
 import pianoAudio from "./audio/piano.wav"
 import guitarAudio from "./audio/guitar.wav"
 import bassAudio from "./audio/bass.wav"
+import drumsAudio from "./audio/drums.wav"
 // import guitarAudio from './../audio/guitar.mp3'
 const pianoAudioInstance = new Audio()
 pianoAudioInstance.src = pianoAudio
@@ -245,10 +246,14 @@ guitarAudioInstance.src = guitarAudio
 const bassAudioInstance = new Audio()
 bassAudioInstance.src = bassAudio
 
+const drumsAudioInstance = new Audio()
+drumsAudioInstance.src = drumsAudio
+
 const start = () => {
   console.log("yo")
   guitarAudioInstance.play()
   bassAudioInstance.play()
   pianoAudioInstance.play()
+  drumsAudioInstance.play()
   // guitarAudio.play()
 }
