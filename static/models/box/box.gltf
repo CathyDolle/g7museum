@@ -15,13 +15,7 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "Cube",
-            "rotation" : [
-                0,
-                -0.7071067690849304,
-                0,
-                0.7071068286895752
-            ]
+            "name" : "Cube"
         }
     ],
     "materials" : [
@@ -32,22 +26,22 @@
                 0,
                 0
             ],
-            "name" : "Material",
+            "name" : "Material.001",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    1,
-                    1,
-                    1,
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.800000011920929,
                     1
                 ],
                 "metallicFactor" : 0,
-                "roughnessFactor" : 0.4000000059604645
+                "roughnessFactor" : 0.5
             }
         }
     ],
     "meshes" : [
         {
-            "name" : "Cube",
+            "name" : "Cube.003",
             "primitives" : [
                 {
                     "attributes" : {
@@ -65,29 +59,29 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 48,
+            "count" : 56,
             "max" : [
-                0.7902668714523315,
-                0.7902668714523315,
-                0.7902668714523315
+                1,
+                1,
+                0.8112871646881104
             ],
             "min" : [
-                -0.7902668714523315,
-                -0.7902668714523315,
-                -0.7902668714523315
+                -1,
+                -1,
+                -1
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 48,
+            "count" : 56,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 48,
+            "count" : 56,
             "type" : "VEC2"
         },
         {
@@ -100,28 +94,28 @@
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 576,
+            "byteLength" : 672,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 576,
-            "byteOffset" : 576
+            "byteLength" : 672,
+            "byteOffset" : 672
         },
         {
             "buffer" : 0,
-            "byteLength" : 384,
-            "byteOffset" : 1152
+            "byteLength" : 448,
+            "byteOffset" : 1344
         },
         {
             "buffer" : 0,
             "byteLength" : 168,
-            "byteOffset" : 1536
+            "byteOffset" : 1792
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 1704,
+            "byteLength" : 1960,
             "uri" : "box.bin"
         }
     ]

@@ -4,6 +4,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import Piano from "./javascript/Piano.js"
 import Guitar from "./javascript/Piano.js"
 import Box from "./javascript/Box.js"
+import { Mesh } from "three"
 
 
 /**
@@ -34,22 +35,35 @@ const scene = new THREE.Scene()
  * Lights
  */
 
-const ambientLight = new THREE.AmbientLight(0xF5F5F5, 1)
-scene.add(ambientLight)
+const ambientlight = new THREE.AmbientLight( 0xffffff, 0.9 ); // soft white light
+ambientlight.castShadow = false
+scene.add( ambientlight );
 
-const rectAreaLight = new THREE.RectAreaLight(0xFfffff, 3, 5, 5)
-rectAreaLight.position.set(8, - 3, 5)
-rectAreaLight.lookAt(scene.position)
-scene.add(rectAreaLight)
+var pianoLight = new THREE.PointLight( 0x8B84E5, 1);
+pianoLight.position.set( 0, 0, 0 );
+pianoLight.castShadow = false
+
+scene.add( pianoLight );
 
 
+var directionalRightLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+directionalRightLight.position.set( 5, 5, 0 );
+scene.add( directionalRightLight );
 
+var directionalLeftLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+directionalLeftLight.position.set( -5, 5, 0 );
+scene.add( directionalLeftLight );
 
-const pointLight = new THREE.PointLight(0x000000, 10, 5, 10)
-pointLight.scale.set(0.1,0.1,0.1)
-scene.add(pointLight)
-const pointLightHelper = new THREE.PointLightHelper(pointLight)
-scene.add(pointLightHelper)
+var directionalBackLight = new THREE.DirectionalLight( 0xffffff, 0.4 );
+directionalBackLight.position.set( 0, 5, -5 );
+scene.add( directionalBackLight );
+
+var directionalFrontLight = new THREE.DirectionalLight( 0xffffff, 0.3);
+directionalFrontLight.position.set( 0, 0, 10 );
+scene.add( directionalFrontLight );
+
+// var directionalFrontLight = new THREE.DirectionalLightHelper(  directionalFrontLight );
+// scene.add(  directionalFrontLight );
 
 /**
  * Objects
