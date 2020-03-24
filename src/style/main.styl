@@ -49,42 +49,42 @@ body
  * START
  */ 
 
-// .start
-//     z-index 4
-//     position absolute
-//     background #E8C7D6
-//     width 100vw
-//     height 100vh
-//     display flex
-//     flex-direction column
-//     justify-content center
-//     align-items center   
-//     font-family lato
+.start
+    z-index 4
+    position absolute
+    background #E8C7D6
+    width 100vw
+    height 100vh
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center   
+    font-family lato
 
-//     p
-//         color white
-//         font-size 20px
-//         text-transform uppercase
-//         letter-spacing 3px
-//         margin-bottom 20px
+    p
+        color white
+        font-size 20px
+        text-transform uppercase
+        letter-spacing 3px
+        margin-bottom 20px
     
-//     button 
-//         color #F2B6CC
-//         padding 5px 10px 5px 10px
-//         width 100px
-//         height 35px
-//         border none
-//         border-radius 5px
-//         text-transform uppercase
-//         letter-spacing 3px
-//         cursor pointer
-//         user-select none
-//         outline none
-//         font-size 20
-//         transition-duration 0.5s
-//         &:hover
-//             background #F2B6CC 
-//             color white
+    button 
+        color #F2B6CC
+        padding 5px 10px 5px 10px
+        width 100px
+        height 35px
+        border none
+        border-radius 5px
+        text-transform uppercase
+        letter-spacing 3px
+        cursor pointer
+        user-select none
+        outline none
+        font-size 20
+        transition-duration 0.5s
+        &:hover
+            background #F2B6CC 
+            color white
 
 /**
  * CANVAS
@@ -143,10 +143,13 @@ body
 
 // HIDDEN
 
-.hidden
+.fadeOut
     animation-name fadeOut
     animation-duration 1s
     animation-fill-mode forwards
+
+.hidden
+    display none
 
 @keyframes fadeOut{
     0%{

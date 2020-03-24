@@ -8,12 +8,16 @@ import { Mesh } from "three"
 
 // START
 
-// const startModal = document.querySelector('.start-js')
-// const startButton = document.querySelector('.start-button-js')
+const startModal = document.querySelector('.start-js')
+const startButton = document.querySelector('.start-button-js')
 
-// startButton.addEventListener('click', () =>{
-//   startModal.classList.add('hidden')
-// })
+startButton.addEventListener('click', () =>{
+  startModal.classList.add('fadeOut')
+})
+
+startModal.addEventListener("animationend", () =>{
+  startModal.classList.add('hidden')
+});
 /**
  * Sizes
  */
