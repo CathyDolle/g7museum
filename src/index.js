@@ -6,7 +6,14 @@ import Guitar from "./javascript/Piano.js"
 import Box from "./javascript/Box.js"
 import { Mesh } from "three"
 
+// START
 
+// const startModal = document.querySelector('.start-js')
+// const startButton = document.querySelector('.start-button-js')
+
+// startButton.addEventListener('click', () =>{
+//   startModal.classList.add('hidden')
+// })
 /**
  * Sizes
  */
@@ -35,41 +42,57 @@ const scene = new THREE.Scene()
  * Lights
  */
 
-const ambientlight = new THREE.AmbientLight( 0xffffff, 0.9 ); // soft white light
-ambientlight.castShadow = false
+const ambientlight = new THREE.AmbientLight( 0xffffff, 0.2 ); // soft white light
+ambientlight.castShadow = true
 scene.add( ambientlight );
 
 var pianoLight = new THREE.PointLight( 0x8B84E5, 1);
 pianoLight.position.set( 0, 0, 0 );
-pianoLight.castShadow = false
+pianoLight.castShadow = true
 
 scene.add( pianoLight );
 
 
-var directionalRightLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-directionalRightLight.position.set( 5, 5, 0 );
-scene.add( directionalRightLight );
+// var directionalRightLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+// directionalRightLight.position.set( 5, 5, 0 );
+// directionalRightLight.castShadow = true
+// scene.add( directionalRightLight );
 
 var directionalLeftLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
 directionalLeftLight.position.set( -5, 5, 0 );
+directionalLeftLight.castShadow = true
 scene.add( directionalLeftLight );
 
-var directionalBackLight = new THREE.DirectionalLight( 0xffffff, 0.4 );
-directionalBackLight.position.set( 0, 5, -5 );
-scene.add( directionalBackLight );
+
+
+// var directionalBackLight = new THREE.DirectionalLight( 0xffffff, 0.4 );
+// directionalBackLight.position.set( 0, 5, -5 );
+// directionalBackLight.castShadow = true
+// scene.add( directionalBackLight );
 
 var directionalFrontLight = new THREE.DirectionalLight( 0xffffff, 0.3);
 directionalFrontLight.position.set( 0, 0, 10 );
+directionalFrontLight.castShadow = true
 scene.add( directionalFrontLight );
 
-// var directionalFrontLight = new THREE.DirectionalLightHelper(  directionalFrontLight );
-// scene.add(  directionalFrontLight );
+const pointLight = new THREE.PointLight(0xff0000, 0.5)
+scene.add(pointLight)
+
+var directionalFrontLight = new THREE.DirectionalLightHelper(  directionalFrontLight );
+scene.add(  directionalFrontLight );
+
+
+
+
 
 /**
  * Objects
  */
 const box = new Box()
 scene.add(box.group)
+const box2 = new Box()
+scene.add(box2.group)
+
 // //  PIANO
 
 const piano = new Piano()
