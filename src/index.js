@@ -42,6 +42,15 @@ rectAreaLight.position.set(8, - 3, 5)
 rectAreaLight.lookAt(scene.position)
 scene.add(rectAreaLight)
 
+
+
+
+const pointLight = new THREE.PointLight(0x000000, 10, 5, 10)
+pointLight.scale.set(0.1,0.1,0.1)
+scene.add(pointLight)
+const pointLightHelper = new THREE.PointLightHelper(pointLight)
+scene.add(pointLightHelper)
+
 /**
  * Objects
  */
