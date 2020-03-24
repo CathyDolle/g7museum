@@ -16,7 +16,6 @@ export default class Box {
       console.log(_gltf.scene)
       this.box = _gltf.scene.children[0]
       this.box.scale.set(1, 1, 1)
-
       this.group.add(this.box)
     })
   }

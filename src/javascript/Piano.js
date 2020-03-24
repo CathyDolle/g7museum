@@ -12,7 +12,7 @@ export default class Piano {
     const gltfLoader = new GLTFLoader()
     gltfLoader.setDRACOLoader(dracoLoader)
 
-    gltfLoader.load("/models/piano/piano.gltf", _gltf => {
+    gltfLoader.load("/models/piano/voxel_midi_controller.gltf", _gltf => {
       console.log(_gltf)
       this.piano = _gltf.scene.children[0]
       this.piano.scale.set(0.01, 0.01, 0.01)
