@@ -6,6 +6,7 @@ import Guitar from "./javascript/Guitar.js"
 import Box from "./javascript/Box.js"
 import Drums from "./javascript/Drums.js"
 import Bass from "./javascript/Bass.js"
+import { TweenLite, TimelineLite } from 'gsap/all'
 import { Mesh, Group } from "three"
 /**
  * Sounds
@@ -173,41 +174,43 @@ window.addEventListener("resize", () => {
 // /**
 //  * Click on piano
 //  */
-// let hoverPiano = false
-// document.addEventListener("click", () => {
-//   if (hoverPiano) {
-//     console.log("click sur le piano")
+let hoverPiano = false
+document.addEventListener("click", () => {
+  if (hoverPiano) {
+    console.log("click sur le piano")
 
-//     TweenLite.to(piano.piano.position, 1, {
-//       y: piano.piano.position.y - 1,
-//       x: piano.piano.position.x - 1,
-//       ease: "Power3.easeInOut"
-//     })
+    TweenLite.to(piano.piano.position, 1, {
+      y: piano.piano.position.y - 1,
+      x: piano.piano.position.x - 1,
+      ease: "Power3.easeInOut"
+    })
 
-//     TweenLite.to(piano.piano.rotation, 1, {
-//       y: Math.PI,
-//       ease: "Power3.easeInOut"
-//     })
-//   }
-// })
+    TweenLite.to(piano.piano.rotation, 1, {
+      y: Math.PI,
+      ease: "Power3.easeInOut"
+    })
+  }
+})
 
 /**
  * Loop
  */
+const raycaster = new THREE.Raycaster()
+
 const loop = () => {
   window.requestAnimationFrame(loop)
   cameraControls.update()
 
   // Cursor raycasting
-  // const raycasterCursor = new THREE.Vector2(cursor.x * 2, -cursor.y * 2)
-  // raycaster.setFromCamera(raycasterCursor, camera)
+  const raycasterCursor = new THREE.Vector2(cursor.x * 2, -cursor.y * 2)
+  raycaster.setFromCamera(raycasterCursor, camera)
 
-  // const intersects = raycaster.intersectObject(piano.group, true)
-  // if (intersects.length) {
-  //   hoverPiano = true
-  // } else {
-  //   hoverPiano = false
-  // }
+  const intersects = raycaster.intersectObject(piano.group, true)
+  if (intersects.length) {
+    hoverPiano = true
+  } else {
+    hoverPiano = false
+  }
 
   // Render
   renderer.render(scene, camera)
