@@ -8,6 +8,8 @@ import Drums from "./javascript/Drums.js"
 import Bass from "./javascript/Bass.js"
 import { TweenLite, TimelineLite } from "gsap/all"
 import { Mesh, Group } from "three"
+import startWebsite from "./javascript/Start.js"
+
 /**
  * Sounds
  */
@@ -174,6 +176,58 @@ window.addEventListener("resize", () => {
 })
 
 /**
+ * AUDIO VARIABLES
+ */
+
+const pianoAudioInstance = new Audio()
+pianoAudioInstance.src = pianoAudio
+pianoAudioInstance.loop = true
+
+const guitarAudioInstance = new Audio()
+guitarAudioInstance.src = guitarAudio
+guitarAudioInstance.loop = true
+
+const bassAudioInstance = new Audio()
+bassAudioInstance.src = bassAudio
+bassAudioInstance.loop = true
+
+// DRUMS
+const drumsAudioInstance = new Audio()
+drumsAudioInstance.src = drumsAudio
+drumsAudioInstance.loop = true
+
+const drumsKickAudioInstance = new Audio()
+drumsKickAudioInstance.src = drumsKickAudio
+drumsKickAudioInstance.loop = true
+
+const drumsPercAudioInstance = new Audio()
+drumsPercAudioInstance.src = drumsPercAudio
+drumsPercAudioInstance.loop = true
+
+const setDefaultVolume = (volume) => {
+  drumsAudioInstance.volume = volume
+  drumsKickAudioInstance.volume = volume
+  drumsPercAudioInstance.volume = volume
+  pianoAudioInstance.volume = volume
+  guitarAudioInstance.volume = volume
+  bassAudioInstance.volume = volume
+}
+
+const start = () => {
+  console.log("yo")
+  setDefaultVolume(0.5)
+  guitarAudioInstance.play()
+  bassAudioInstance.play()
+  pianoAudioInstance.play()
+  drumsAudioInstance.play()
+  drumsPercAudioInstance.play()
+  drumsKickAudioInstance.play()
+  // guitarAudio.play()
+}
+
+startWebsite(start)
+
+/**
  * Click On Instruments
  */
 let hasPlayedZoomAnimation = false
@@ -192,6 +246,7 @@ function instrumentZoom(posX, posY) {
   })
   hasPlayedZoomAnimation = true
   isZooming = true
+  setDefaultVolume(0.1)
 }
 
 function originalZoom(posX, posY, posZ) {
@@ -207,6 +262,7 @@ function originalZoom(posX, posY, posZ) {
   })
   hasPlayedZoomAnimation = false
   isZooming = true
+  setDefaultVolume(0.5)
 }
 
 //PIANO
@@ -215,6 +271,7 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverPiano && hasPlayedZoomAnimation === false) {
     instrumentZoom(1.25, 1.25)
+    pianoAudioInstance.volume = 1
   } else if (hoverPiano && hasPlayedZoomAnimation === true) {
     originalZoom(-1.25, -1.25, -6)
   }
@@ -226,6 +283,7 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverGuitar && hasPlayedZoomAnimation === false) {
     instrumentZoom(-1.25, 1.25)
+    guitarAudioInstance.volume = 1
   } else if (hoverGuitar && hasPlayedZoomAnimation === true) {
     originalZoom(1.25, -1.25, -6)
   }
@@ -236,6 +294,7 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverDrums && hasPlayedZoomAnimation === false) {
     instrumentZoom(-1.25, -1.25)
+    drumsAudioInstance.volume = 1
   } else if (hoverDrums && hasPlayedZoomAnimation === true) {
     originalZoom(1.25, 1.25, -6)
   }
@@ -246,6 +305,7 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverBass && hasPlayedZoomAnimation === false) {
     instrumentZoom(1.25, -1.25)
+    bassAudioInstance.volume = 1
   } else if (hoverBass && hasPlayedZoomAnimation === true) {
     originalZoom(-1.25, 1.25, -6)
   }
@@ -300,22 +360,6 @@ const loop = () => {
 loop()
 
 /**
- * Start first page/ playing sound
- */
-
-// const startModal = document.querySelector(".start-js")
-// const startButton = document.querySelector(".start-button-js")
-
-// startModal.addEventListener("animationend", () => {
-//   startModal.classList.add("hidden")
-// })
-
-// startButton.addEventListener("click", () => {
-//   start()
-//   startModal.classList.add("fadeOut")
-// })
-
-/**
  * MENU
  */
 
@@ -339,44 +383,4 @@ function closeModal() {
   modalAbout.classList.remove("openModal")
   modalAbout.classList.add("closeModal")
   console.log("yo")
-}
-
-/**
- * OKAY AUDIO
- */
-
-const pianoAudioInstance = new Audio()
-pianoAudioInstance.src = pianoAudio
-pianoAudioInstance.loop = true
-
-const guitarAudioInstance = new Audio()
-guitarAudioInstance.src = guitarAudio
-guitarAudioInstance.loop = true
-
-const bassAudioInstance = new Audio()
-bassAudioInstance.src = bassAudio
-bassAudioInstance.loop = true
-
-// DRUMS
-const drumsAudioInstance = new Audio()
-drumsAudioInstance.src = drumsAudio
-drumsAudioInstance.loop = true
-
-const drumsKickAudioInstance = new Audio()
-drumsKickAudioInstance.src = drumsKickAudio
-drumsKickAudioInstance.loop = true
-
-const drumsPercAudioInstance = new Audio()
-drumsPercAudioInstance.src = drumsPercAudio
-drumsPercAudioInstance.loop = true
-
-const start = () => {
-  console.log("yo")
-  guitarAudioInstance.play()
-  bassAudioInstance.play()
-  pianoAudioInstance.play()
-  drumsAudioInstance.play()
-  drumsPercAudioInstance.play()
-  drumsKickAudioInstance.play()
-  // guitarAudio.play()
 }
