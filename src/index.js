@@ -283,7 +283,7 @@ function instrumentZoom(posX, posY) {
   TweenLite.to(boxContent.position, 1, {
     x: boxContent.position.x + posX,
     y: boxContent.position.y + posY,
-    z: camera.position.z - 1.85,
+    z: camera.position.z - 1.6,
     ease: "Power3.easeInOut"
   })
   hasPlayedZoomAnimation = true
