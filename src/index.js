@@ -48,47 +48,53 @@ window.addEventListener("mousemove", _event => {
  */
 const scene = new THREE.Scene()
 
+let hasStarted = false
 /**
  * Lights
  */
 
-const ambientlight = new THREE.AmbientLight(0xffffff, 0.8) // soft white light
+const ambientlight = new THREE.AmbientLight(0xffffff, 0.4) // soft white light
 ambientlight.castShadow = true
 scene.add(ambientlight)
 
 // Box Piano Light
-const pianoLight = new THREE.PointLight(0x8b84e5, 1)
-pianoLight.position.set(0, 0.5, 0)
+const pianoLight = new THREE.PointLight(0x8b84e5, 0.4, 10)
+pianoLight.position.set(0, 1.25, 0.7)
+pianoLight.scale.set(0.25, 0.25, 0.25)
 pianoLight.castShadow = true
 
-scene.add(pianoLight)
+// Box Guitar Light
+const guitarLight = new THREE.PointLight(0xAED4FF, 0.4, 10)
+guitarLight.position.set(0, 1.25, 0.7)
+guitarLight.scale.set(0.25, 0.25, 0.25)
+guitarLight.castShadow = true
 
-// Directional light test
+// Box Drums Light
+const drumsLight = new THREE.PointLight(0xFFE0AE, 0.4, 10)
+drumsLight.position.set(0, 1.25, 0.7)
+drumsLight.scale.set(0.25, 0.25, 0.25)
+drumsLight.castShadow = true
 
-// const directionalRightLight = new THREE.DirectionalLight( 0xff0000, 0.8 );
-// directionalRightLight.position.set( 5, 5, 0 );
-// directionalRightLight.castShadow = true
-// scene.add( directionalRightLight );
 
-// const directionalLeftLight = new THREE.DirectionalLight(0xff0000, 0.8)
-// directionalLeftLight.position.set(-5, 5, 0)
-// directionalLeftLight.castShadow = true
-// scene.add(directionalLeftLight)
+// Box Bass Light
+const bassLight = new THREE.PointLight(0xff0000, 0.4, 10)
+bassLight.position.set(0, 1.25, 0.7)
+bassLight.scale.set(0.25, 0.25, 0.25)
+bassLight.castShadow = true
 
-// const directionalBackLight = new THREE.DirectionalLight(0xffffff, 0.4)
-// directionalBackLight.position.set(0, 5, -5)
-// directionalBackLight.castShadow = true
-// scene.add(directionalBackLight)
+const bassLightHelper = new THREE.PointLightHelper(bassLight)
+scene.add(bassLightHelper)
 
-// const directionalFrontLight = new THREE.DirectionalLight(0xffffff, 0.3)
-// directionalFrontLight.position.set(0, 0, 10)
-// directionalFrontLight.castShadow = true
-// scene.add(directionalFrontLight)
+const pianoLightHelper = new THREE.PointLightHelper(pianoLight)
+scene.add(pianoLightHelper)
 
-// const directionalFrontLight = new THREE.DirectionalLightHelper(
-//   directionalFrontLight
-// )
-// scene.add(directionalFrontLight)
+
+const drumsLightHelper = new THREE.PointLightHelper(drumsLight)
+scene.add(drumsLightHelper)
+
+
+const guitarLightHelper = new THREE.PointLightHelper(guitarLight)
+scene.add(guitarLightHelper)
 
 /**
  * Objects
@@ -124,11 +130,18 @@ scene.add(boxContent)
 const piano = new Piano()
 box.group.add(piano.group)
 const guitar = new Guitar()
-box2.group.add(guitar.group)
+box4.group.add(guitar.group)
 const drums = new Drums()
 box3.group.add(drums.group)
 const bass = new Bass()
-box4.group.add(bass.group)
+box2.group.add(bass.group)
+
+// ADD LIGHT
+
+box.group.add(pianoLight)
+box2.group.add(bassLight)
+box3.group.add(drumsLight)
+box4.group.add(guitarLight)
 
 /**
  * Camera
@@ -151,10 +164,9 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setClearAlpha(0)
-
+renderer.shadowMap.enabled = true 
 const canvasContainer = document.querySelector(".canvas-js")
 canvasContainer.appendChild(renderer.domElement)
-
 /**
  * Camera Controls
  */
@@ -204,7 +216,7 @@ const drumsPercAudioInstance = new Audio()
 drumsPercAudioInstance.src = drumsPercAudio
 drumsPercAudioInstance.loop = true
 
-const setDefaultVolume = (volume) => {
+const setDefaultVolume = volume => {
   drumsAudioInstance.volume = volume
   drumsKickAudioInstance.volume = volume
   drumsPercAudioInstance.volume = volume
@@ -213,8 +225,31 @@ const setDefaultVolume = (volume) => {
   bassAudioInstance.volume = volume
 }
 
+// MUTE/UNMUTE
+const muteSound = document.querySelector(".mute-js")
+const unmuteSound = document.querySelector(".unmute-js")
+let isMuted = false
+
+muteSound.addEventListener("click", () => {
+  isMuted = false
+  setDefaultVolume(0.5)
+  muteSound.classList.add("hidden")
+  unmuteSound.classList.remove("hidden")
+})
+
+unmuteSound.addEventListener("click", () => {
+  isMuted = true
+  setDefaultVolume(0)
+  unmuteSound.classList.add("hidden")
+  muteSound.classList.remove("hidden")
+})
+
+/**
+ * START
+ */
 const start = () => {
   console.log("yo")
+  hasStarted = true
   setDefaultVolume(0.5)
   guitarAudioInstance.play()
   bassAudioInstance.play()
@@ -241,12 +276,12 @@ function instrumentZoom(posX, posY) {
   TweenLite.to(boxContent.position, 1, {
     x: boxContent.position.x + posX,
     y: boxContent.position.y + posY,
-    z: camera.position.z - 2,
+    z: camera.position.z - 1.85,
     ease: "Power3.easeInOut"
   })
   hasPlayedZoomAnimation = true
   isZooming = true
-  setDefaultVolume(0.1)
+  if (!isMuted) setDefaultVolume(0.1)
 }
 
 function originalZoom(posX, posY, posZ) {
@@ -262,7 +297,7 @@ function originalZoom(posX, posY, posZ) {
   })
   hasPlayedZoomAnimation = false
   isZooming = true
-  setDefaultVolume(0.5)
+  if (!isMuted) setDefaultVolume(0.5)
 }
 
 //PIANO
@@ -271,7 +306,7 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverPiano && hasPlayedZoomAnimation === false) {
     instrumentZoom(1.25, 1.25)
-    pianoAudioInstance.volume = 1
+    if (!isMuted) pianoAudioInstance.volume = 1
   } else if (hoverPiano && hasPlayedZoomAnimation === true) {
     originalZoom(-1.25, -1.25, -6)
   }
@@ -283,7 +318,7 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverGuitar && hasPlayedZoomAnimation === false) {
     instrumentZoom(-1.25, 1.25)
-    guitarAudioInstance.volume = 1
+    if (!isMuted) guitarAudioInstance.volume = 1
   } else if (hoverGuitar && hasPlayedZoomAnimation === true) {
     originalZoom(1.25, -1.25, -6)
   }
@@ -294,7 +329,7 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverDrums && hasPlayedZoomAnimation === false) {
     instrumentZoom(-1.25, -1.25)
-    drumsAudioInstance.volume = 1
+    if (!isMuted) drumsAudioInstance.volume = 1
   } else if (hoverDrums && hasPlayedZoomAnimation === true) {
     originalZoom(1.25, 1.25, -6)
   }
@@ -305,7 +340,7 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverBass && hasPlayedZoomAnimation === false) {
     instrumentZoom(1.25, -1.25)
-    bassAudioInstance.volume = 1
+    if (!isMuted) bassAudioInstance.volume = 1
   } else if (hoverBass && hasPlayedZoomAnimation === true) {
     originalZoom(-1.25, 1.25, -6)
   }
@@ -326,28 +361,29 @@ const loop = () => {
 
   //PIANO
   const intersectsPiano = raycaster.intersectObject(box.group, true)
-  if (intersectsPiano.length) {
+  if (intersectsPiano.length && hasStarted) {
     hoverPiano = true
   } else {
     hoverPiano = false
   }
   //GUITAR
   const intersectsGuitar = raycaster.intersectObject(box2.group, true)
-  if (intersectsGuitar.length) {
+  if (intersectsGuitar.length && hasStarted) {
     hoverGuitar = true
   } else {
     hoverGuitar = false
   }
   //DRUMS
   const intersectsDrums = raycaster.intersectObject(box3.group, true)
-  if (intersectsDrums.length) {
+  if (intersectsDrums.length && hasStarted) {
     hoverDrums = true
+    console.log("hover drums")
   } else {
     hoverDrums = false
   }
   //DRUMS
   const intersectsBass = raycaster.intersectObject(box4.group, true)
-  if (intersectsBass.length) {
+  if (intersectsBass.length && hasStarted) {
     hoverBass = true
   } else {
     hoverBass = false

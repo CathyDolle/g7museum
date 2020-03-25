@@ -12,6 +12,7 @@ export default function startWebsite(start) {
 
   startButton.addEventListener("click", () => {
     start()
+    //document.querySelector(".canvas").style.pointerEvents = "auto"
     startModal.classList.add("fadeOut")
   })
 }
