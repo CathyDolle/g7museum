@@ -53,29 +53,37 @@ let hasStarted = false
  * Lights
  */
 
-const ambientlight = new THREE.AmbientLight(0xffffff, 0.3) // soft white light
+const ambientlight = new THREE.AmbientLight(0xffffff, 0.7) // soft white light
 ambientlight.castShadow = true
 scene.add(ambientlight)
 
+// Directional Light
+// const directionalLight = new THREE.DirectionalLight(0xD8DCFF, 0.5)
+// directionalLight.position.set(0, 0, 5)
+// directionalLight.castShadow = true
+// scene.add(directionalLight)
+
+// const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
+// scene.add(directionalLightHelper)
 
 // Box Piano Light
-const pianoLight = new THREE.PointLight(0x8b84e5, 2, 1.4)
+const pianoLight = new THREE.PointLight(0xFFA2FB, 1, 2)
 pianoLight.position.set(0, 1.05, 0)
 pianoLight.castShadow = true
 
 // Box Guitar Light
-const guitarLight = new THREE.PointLight(0xaed4ff, 2, 1.4)
+const guitarLight = new THREE.PointLight(0xDBB1FF, 1, 2)
 guitarLight.position.set(0, 1.05, 0)
 
 guitarLight.castShadow = true
 
 // Box Drums Light
-const drumsLight = new THREE.PointLight(0xffe0ae, 2, 1.4)
+const drumsLight = new THREE.PointLight(0x6EDDFF, 1, 2)
 drumsLight.position.set(0, 1.05, 0)
 drumsLight.castShadow = true
 
 // Box Bass Light
-const bassLight = new THREE.PointLight(0xff0000, 2, 1.4)
+const bassLight = new THREE.PointLight(0xFD6868, 1, 2)
 bassLight.position.set(0, 1.05, 0)
 bassLight.castShadow = true
 
@@ -160,6 +168,8 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setClearAlpha(0)
+renderer.outputEncoding = THREE.sRGBEncoding
+renderer.gammaFactor = 2.2
 renderer.shadowMap.enabled = true
 
 const canvasContainer = document.querySelector(".canvas-js")
