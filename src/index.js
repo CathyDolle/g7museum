@@ -72,7 +72,7 @@ pianoLight.position.set(0, 1.05, 0)
 pianoLight.castShadow = true
 
 // Box Guitar Light
-const guitarLight = new THREE.PointLight(0xFF8888, 1, 2)
+const guitarLight = new THREE.PointLight(0xDBB1FF, 1, 2)
 guitarLight.position.set(0, 1.05, 0)
 
 guitarLight.castShadow = true
@@ -83,7 +83,7 @@ drumsLight.position.set(0, 1.05, 0)
 drumsLight.castShadow = true
 
 // Box Bass Light
-const bassLight = new THREE.PointLight(0xDBB1FF, 1, 2)
+const bassLight = new THREE.PointLight(0xFD6868, 1, 2)
 bassLight.position.set(0, 1.05, 0)
 bassLight.castShadow = true
 
@@ -170,7 +170,7 @@ renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setClearAlpha(0)
 renderer.outputEncoding = THREE.sRGBEncoding
 renderer.gammaFactor = 2.2
-renderer.shadowMap.enabled = true
+
 
 const canvasContainer = document.querySelector(".canvas-js")
 canvasContainer.appendChild(renderer.domElement)
@@ -283,7 +283,7 @@ function instrumentZoom(posX, posY) {
   TweenLite.to(boxContent.position, 1, {
     x: boxContent.position.x + posX,
     y: boxContent.position.y + posY,
-    z: camera.position.z - 1.65,
+    z: camera.position.z - 1.85,
     ease: "Power3.easeInOut"
   })
   hasPlayedZoomAnimation = true
@@ -427,3 +427,18 @@ function closeModal() {
   modalAbout.classList.add("closeModal")
   console.log("yo")
 }
+
+
+/**
+ * Paralax box
+ */
+
+window.addEventListener('mousemove', (_event) => {
+    const ratioX = _event.clientX / sizes.width - 0.5
+    const ratioY = _event.clientY / sizes.height - 0.5
+        const translateX = -ratioX * 1
+        const translateY = -ratioY * 1
+        camera.position.x = translateX
+        camera.position.y = translateY
+
+})
