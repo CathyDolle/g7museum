@@ -1,21 +1,13 @@
 import "./style/main.styl"
 import * as THREE from "three"
-import {
-  OrbitControls
-} from "three/examples/jsm/controls/OrbitControls.js"
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import Piano from "./javascript/Piano.js"
 import Guitar from "./javascript/Guitar.js"
 import Box from "./javascript/Box.js"
 import Drums from "./javascript/Drums.js"
 import Bass from "./javascript/Bass.js"
-import {
-  TweenLite,
-  TimelineLite
-} from 'gsap/all'
-import {
-  Mesh,
-  Group
-} from "three"
+import { TweenLite, TimelineLite } from "gsap/all"
+import { Mesh, Group } from "three"
 /**
  * Sounds
  */
@@ -184,80 +176,80 @@ window.addEventListener("resize", () => {
 /**
  * Click On Instruments
  */
+let hasPlayedZoomAnimation = false
+let isZooming = false
+
 //cameraFunction
-function instrumentZoom(x, y) {
+function instrumentZoom(posX, posY) {
+  setTimeout(() => {
+    isZooming = false
+  }, 1000)
   TweenLite.to(boxContent.position, 1, {
-    x: boxContent.position.x = x,
-    y: boxContent.position.y = y,
+    x: boxContent.position.x + posX,
+    y: boxContent.position.y + posY,
     z: camera.position.z - 2,
+    ease: "Power3.easeInOut"
+  })
+  hasPlayedZoomAnimation = true
+  isZooming = true
+}
+
+function originalZoom(posX, posY, posZ) {
+  setTimeout(() => {
+    isZooming = false
+  }, 1000)
+  TweenLite.to(boxContent.position, 1, {
+    x: boxContent.position.x + posX,
+    y: boxContent.position.y + posY,
+    z: camera.position.z + posZ,
 
     ease: "Power3.easeInOut"
   })
+  hasPlayedZoomAnimation = false
+  isZooming = true
 }
 
 //PIANO
 let hoverPiano = false
 document.addEventListener("click", () => {
-  if (hoverPiano) {
-    console.log("click sur le piano")
-
-    TweenLite.to(boxContent.position, 1, {
-      x: boxContent.position.x + 1.25,
-      y: boxContent.position.y + 1.25,
-      z: camera.position.z - 2,
-
-      ease: "Power3.easeInOut"
-    })
+  if (isZooming) return
+  if (hoverPiano && hasPlayedZoomAnimation === false) {
+    instrumentZoom(1.25, 1.25)
+  } else if (hoverPiano && hasPlayedZoomAnimation === true) {
+    originalZoom(-1.25, -1.25, -6)
   }
 })
+
 //GUITAR
 let hoverGuitar = false
 document.addEventListener("click", () => {
-  if (hoverGuitar) {
-    console.log("click sur le Guitar")
-
-    TweenLite.to(boxContent.position, 1, {
-      x: boxContent.position.x - 1.25,
-      y: boxContent.position.y + 1.25,
-      z: camera.position.z - 2,
-
-      ease: "Power3.easeInOut"
-    })
+  if (isZooming) return
+  if (hoverGuitar && hasPlayedZoomAnimation === false) {
+    instrumentZoom(-1.25, 1.25)
+  } else if (hoverGuitar && hasPlayedZoomAnimation === true) {
+    originalZoom(1.25, -1.25, -6)
   }
 })
 //DRUMS
 let hoverDrums = false
 document.addEventListener("click", () => {
-  if (hoverDrums) {
-    console.log("click sur le Drums")
-
-    TweenLite.to(boxContent.position, 1, {
-      x: boxContent.position.x - 1.25,
-      y: boxContent.position.y - 1.25,
-      z: camera.position.z - 2,
-
-      ease: "Power3.easeInOut"
-    })
+  if (isZooming) return
+  if (hoverDrums && hasPlayedZoomAnimation === false) {
+    instrumentZoom(-1.25, -1.25)
+  } else if (hoverDrums && hasPlayedZoomAnimation === true) {
+    originalZoom(1.25, 1.25, -6)
   }
 })
 //BASS
 let hoverBass = false
 document.addEventListener("click", () => {
-  if (hoverBass) {
-    console.log("click sur le Bass")
-
-    TweenLite.to(boxContent.position, 1, {
-      x: boxContent.position.x + 1.25,
-      y: boxContent.position.y - 1.25,
-      z: camera.position.z - 2,
-
-      ease: "Power3.easeInOut"
-    })
+  if (isZooming) return
+  if (hoverBass && hasPlayedZoomAnimation === false) {
+    instrumentZoom(1.25, -1.25)
+  } else if (hoverBass && hasPlayedZoomAnimation === true) {
+    originalZoom(-1.25, 1.25, -6)
   }
 })
-
-
-
 
 /**
  * Loop
@@ -300,9 +292,6 @@ const loop = () => {
   } else {
     hoverBass = false
   }
-
-
-
 
   // Render
   renderer.render(scene, camera)
