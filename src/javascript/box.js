@@ -88,7 +88,7 @@ export default class Box {
     boxBackMesh.position.set(-0.05,1,-0.95)
     
 
-    const planMaterial = new THREE.MeshBasicMaterial({color:0xf5f5f5, })
+    const planMaterial = new THREE.MeshBasicMaterial({color:0xd6d4d4, })
     
     const planBottom = new THREE.PlaneGeometry(2.1,2,2)
     const planBottomMesh = new THREE.Mesh(planBottom, planMaterial)
