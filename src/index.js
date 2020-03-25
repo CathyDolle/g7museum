@@ -179,18 +179,61 @@ document.addEventListener("click", () => {
   if (hoverPiano) {
     console.log("click sur le piano")
 
-    TweenLite.to(piano.piano.position, 1, {
-      y: piano.piano.position.y - 1,
-      x: piano.piano.position.x - 1,
-      ease: "Power3.easeInOut"
-    })
+    TweenLite.to(boxContent.position, 1, {
+      x: boxContent.position.x +1.25,
+      y: boxContent.position.y +1.25,
+      z: camera.position.z - 1.5,
 
-    TweenLite.to(piano.piano.rotation, 1, {
-      y: Math.PI,
       ease: "Power3.easeInOut"
     })
   }
 })
+
+let hoverGuitar = false
+document.addEventListener("click", () => {
+  if (hoverGuitar) {
+    console.log("click sur le Guitar")
+
+    TweenLite.to(boxContent.position, 1, {
+      x: boxContent.position.x -1.25,
+      y: boxContent.position.y +1.25,
+      z: camera.position.z - 1.5,
+
+      ease: "Power3.easeInOut"
+    })
+  }
+})
+
+let hoverDrums = false
+document.addEventListener("click", () => {
+  if (hoverDrums) {
+    console.log("click sur le Drums")
+
+    TweenLite.to(boxContent.position, 1, {
+      x: boxContent.position.x -1.25,
+      y: boxContent.position.y -1.25,
+      z: camera.position.z - 1.5,
+
+      ease: "Power3.easeInOut"
+    })
+  }
+})
+let hoverBass = false
+document.addEventListener("click", () => {
+  if (hoverBass) {
+    console.log("click sur le Bass")
+
+    TweenLite.to(boxContent.position, 1, {
+      x: boxContent.position.x +1.25,
+      y: boxContent.position.y -1.25,
+      z: camera.position.z - 1.5,
+
+      ease: "Power3.easeInOut"
+    })
+  }
+})
+
+
 
 /**
  * Loop
@@ -205,12 +248,33 @@ const loop = () => {
   const raycasterCursor = new THREE.Vector2(cursor.x * 2, -cursor.y * 2)
   raycaster.setFromCamera(raycasterCursor, camera)
 
-  const intersects = raycaster.intersectObject(piano.group, true)
-  if (intersects.length) {
+  const intersectsPiano = raycaster.intersectObject(piano.group, true)
+  if (intersectsPiano.length) {
     hoverPiano = true
   } else {
     hoverPiano = false
   }
+
+  const intersectsGuitar = raycaster.intersectObject(guitar.group, true)
+  if (intersectsGuitar.length) {
+    hoverGuitar = true
+  } else {
+    hoverGuitar = false
+  }
+  const intersectsDrums = raycaster.intersectObject(drums.group, true)
+  if (intersectsDrums.length) {
+    hoverDrums = true
+  } else {
+    hoverDrums = false
+  }
+  const intersectsBass = raycaster.intersectObject(bass.group, true)
+  if (intersectsBass.length) {
+    hoverBass = true
+  } else {
+    hoverBass = false
+  }
+
+
 
   // Render
   renderer.render(scene, camera)

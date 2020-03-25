@@ -13,7 +13,6 @@ export default class Bass {
     gltfLoader.setDRACOLoader(dracoLoader)
 
     gltfLoader.load("./models/bass/guitar.gltf", _gltf => {
-      console.log(_gltf)
       this.bass = _gltf.scene.children[0]
       this.bass.position.set(0, 0.55, 0)
       this.bass.scale.set(0.06, 0.06, 0.06)
