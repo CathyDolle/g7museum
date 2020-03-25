@@ -72,7 +72,7 @@ pianoLight.position.set(0, 1.05, 0)
 pianoLight.castShadow = true
 
 // Box Guitar Light
-const guitarLight = new THREE.PointLight(0xDBB1FF, 1, 2)
+const guitarLight = new THREE.PointLight(0xFF8888, 1, 2)
 guitarLight.position.set(0, 1.05, 0)
 
 guitarLight.castShadow = true
@@ -83,7 +83,7 @@ drumsLight.position.set(0, 1.05, 0)
 drumsLight.castShadow = true
 
 // Box Bass Light
-const bassLight = new THREE.PointLight(0xFD6868, 1, 2)
+const bassLight = new THREE.PointLight(0xDBB1FF, 1, 2)
 bassLight.position.set(0, 1.05, 0)
 bassLight.castShadow = true
 
@@ -283,7 +283,7 @@ function instrumentZoom(posX, posY) {
   TweenLite.to(boxContent.position, 1, {
     x: boxContent.position.x + posX,
     y: boxContent.position.y + posY,
-    z: camera.position.z - 1.85,
+    z: camera.position.z - 1.65,
     ease: "Power3.easeInOut"
   })
   hasPlayedZoomAnimation = true

@@ -15,8 +15,8 @@ export default class Drums {
     gltfLoader.load("./models/drums/drums.gltf", _gltf => {
 
       this.drums = _gltf.scene.children[0]
-      this.drums.position.set(-0.35, -1.95, 1.05)
-      this.drums.scale.set(1.8, 1.8, 1.8)
+      this.drums.position.set(-0.5, -3.15, 1.60)
+      this.drums.scale.set(2.3, 2.3, 2.3)
       this.group.add(this.drums)
     })
   }
