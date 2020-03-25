@@ -6,10 +6,20 @@ import Guitar from "./javascript/Guitar.js"
 import Box from "./javascript/Box.js"
 import Drums from "./javascript/Drums.js"
 import Bass from "./javascript/Bass.js"
-
-
-
 import { Mesh, Group } from "three"
+/**
+ * Sounds
+ */
+// PIANO
+import pianoAudio from "./audio/piano.wav"
+// GUITAR
+import guitarAudio from "./audio/guitar.wav"
+// BASS
+import bassAudio from "./audio/bass.wav"
+// DRUMS
+import drumsAudio from "./audio/drums.wav"
+import drumsPercAudio from "./audio/drumsPerc.wav"
+import drumsKickAudio from "./audio/drumsKick.wav"
 
 /**
  * Sizes
@@ -43,35 +53,36 @@ const ambientlight = new THREE.AmbientLight(0xffffff, 0.8) // soft white light
 ambientlight.castShadow = true
 scene.add(ambientlight)
 
-var pianoLight = new THREE.PointLight(0x8b84e5, 1)
+// Box Piano Light
+const pianoLight = new THREE.PointLight(0x8b84e5, 1)
 pianoLight.position.set(0, 0.5, 0)
 pianoLight.castShadow = true
 
 scene.add(pianoLight)
 
-// var directionalRightLight = new THREE.DirectionalLight( 0xff0000, 0.8 );
+// Directional light test
+
+// const directionalRightLight = new THREE.DirectionalLight( 0xff0000, 0.8 );
 // directionalRightLight.position.set( 5, 5, 0 );
 // directionalRightLight.castShadow = true
 // scene.add( directionalRightLight );
 
-// var directionalLeftLight = new THREE.DirectionalLight(0xff0000, 0.8)
+// const directionalLeftLight = new THREE.DirectionalLight(0xff0000, 0.8)
 // directionalLeftLight.position.set(-5, 5, 0)
 // directionalLeftLight.castShadow = true
 // scene.add(directionalLeftLight)
 
-var directionalBackLight = new THREE.DirectionalLight( 0xffffff, 0.4 );
-directionalBackLight.position.set( 0, 5, -5 );
-directionalBackLight.castShadow = true
-scene.add( directionalBackLight );
+// const directionalBackLight = new THREE.DirectionalLight(0xffffff, 0.4)
+// directionalBackLight.position.set(0, 5, -5)
+// directionalBackLight.castShadow = true
+// scene.add(directionalBackLight)
 
-// var directionalFrontLight = new THREE.DirectionalLight(0xffffff, 0.3)
+// const directionalFrontLight = new THREE.DirectionalLight(0xffffff, 0.3)
 // directionalFrontLight.position.set(0, 0, 10)
 // directionalFrontLight.castShadow = true
 // scene.add(directionalFrontLight)
 
-
-
-// var directionalFrontLight = new THREE.DirectionalLightHelper(
+// const directionalFrontLight = new THREE.DirectionalLightHelper(
 //   directionalFrontLight
 // )
 // scene.add(directionalFrontLight)
@@ -80,35 +91,32 @@ scene.add( directionalBackLight );
  * Objects
  */
 
-
-
-
 const boxContent = new Group()
 
+// EACH BOX x4
+
 const box = new Box()
-box.group.position.set(0.05, -1,0)
+box.group.position.set(0.05, -1, 0)
 box.group.castShadow = true
 boxContent.add(box.group)
 const box2 = new Box()
-box2.group.position.set(2.55, -1,0)
+box2.group.position.set(2.55, -1, 0)
 box2.group.castShadow = true
 boxContent.add(box2.group)
 const box3 = new Box()
-box3.group.position.set(2.55, 1.45,0)
+box3.group.position.set(2.55, 1.45, 0)
 box3.group.castShadow = true
 boxContent.add(box3.group)
 const box4 = new Box()
-box4.group.position.set(0.05, 1.45,0)
+box4.group.position.set(0.05, 1.45, 0)
 box4.group.castShadow = true
 boxContent.add(box4.group)
 
 boxContent.position.set(-1.25, -1.25, 0)
 
-
 scene.add(boxContent)
 
-
-// //  PIANO
+//  INSTRUMENTS INSIDE BOX
 
 const piano = new Piano()
 box.group.add(piano.group)
@@ -118,25 +126,6 @@ const drums = new Drums()
 box3.group.add(drums.group)
 const bass = new Bass()
 box4.group.add(bass.group)
-
-// //  Guitar
-
-// const guitar = new Guitar()
-// scene.add(guitar.group)
-
-// const raycaster = new THREE.Raycaster()
-/**
- * GroundFloor
- */
-// const groundFloorGroup = new THREE.Group()
-// scene.add(groundFloorGroup)
-
-// const walls = new THREE.Mesh(
-//   new THREE.BoxGeometry(5, 2.5, 5, 1, 1, 1),
-//   new THREE.MeshStandardMaterial({ color: 0xe8c7d6 })
-// )
-// walls.position.y = 1.25
-// groundFloorGroup.add(walls)
 
 /**
  * Camera
@@ -187,7 +176,7 @@ window.addEventListener("resize", () => {
 // let hoverPiano = false
 // document.addEventListener("click", () => {
 //   if (hoverPiano) {
-//     console.log("click sur le canard")
+//     console.log("click sur le piano")
 
 //     TweenLite.to(piano.piano.position, 1, {
 //       y: piano.piano.position.y - 1,
@@ -227,54 +216,50 @@ const loop = () => {
 loop()
 
 /**
- * CURSOR
+ * Start first page/ playing sound
  */
 
-// const container = document.getElementById("cursor")
-// const cursorCustom = container.querySelector(".cursor-wrapper")
-// const pointer = container.querySelector(".pointer")
-// let cursorPos = { x: 0, y: 0 }
-// let cursorOffset = { x: 0, y: 0 }
+// const startModal = document.querySelector(".start-js")
+// const startButton = document.querySelector(".start-button-js")
 
-// function syncCursor(elem = cursorCustom) {
-//   const transform = `translate(${cursorPos.x +
-//     cursorOffset.x}px, ${cursorPos.y + cursorOffset.y}px)`
+// startModal.addEventListener("animationend", () => {
+//   startModal.classList.add("hidden")
+// })
 
-//   elem.style.transform = transform
-// }
-
-// document.addEventListener("mousemove", e => {
-//   cursorPos.x = e.clientX
-//   cursorPos.y = e.clientY
-//   syncCursor()
-//   syncCursor(pointer)
+// startButton.addEventListener("click", () => {
+//   start()
+//   startModal.classList.add("fadeOut")
 // })
 
 /**
- * Start
+ * MENU
  */
 
-const startModal = document.querySelector(".start-js")
-const startButton = document.querySelector(".start-button-js")
+const aboutButton = document.querySelector(".about-button-js")
+const modalAbout = document.querySelector(".modal-about-js")
+const closeModalButton = document.querySelector(".close-js")
 
-startModal.addEventListener("animationend", () => {
-  startModal.classList.add("hidden")
+aboutButton.addEventListener("click", () => {
+  openModal()
 })
 
-startButton.addEventListener("click", () => {
-  start()
-  startModal.classList.add("fadeOut")
+closeModalButton.addEventListener("click", () => {
+  closeModal()
 })
 
-// SOUND
-import pianoAudio from "./audio/piano.wav"
-import guitarAudio from "./audio/guitar.wav"
-import bassAudio from "./audio/bass.wav"
-// DRUMS
-import drumsAudio from "./audio/drums.wav"
-import drumsPercAudio from "./audio/drumsPerc.wav"
-import drumsKickAudio from "./audio/drumsKick.wav"
+function openModal() {
+  modalAbout.classList.add("openModal")
+}
 
+function closeModal() {
+  modalAbout.classList.remove("openModal")
+  modalAbout.classList.add("closeModal")
+  console.log("yo")
+}
+
+/**
+ * OKAY AUDIO
+ */
 
 const pianoAudioInstance = new Audio()
 pianoAudioInstance.src = pianoAudio
