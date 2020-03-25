@@ -9,6 +9,7 @@ import Bass from "./javascript/Bass.js"
 import { TweenLite, TimelineLite } from "gsap/all"
 import { Mesh, Group } from "three"
 import startWebsite from "./javascript/Start.js"
+import font from "three/examples/fonts/helvetiker_bold.typeface.json"
 
 /**
  * Sounds
@@ -67,23 +68,23 @@ scene.add(ambientlight)
 // scene.add(directionalLightHelper)
 
 // Box Piano Light
-const pianoLight = new THREE.PointLight(0xFFA2FB, 1.2, 3)
+const pianoLight = new THREE.PointLight(0xffa2fb, 1.2, 3)
 pianoLight.position.set(0, 1.05, 0)
 pianoLight.castShadow = true
 
 // Box Guitar Light
-const guitarLight = new THREE.PointLight(0x6CCCFF, 1.2, 3)
+const guitarLight = new THREE.PointLight(0x6cccff, 1.2, 3)
 guitarLight.position.set(0, 1.05, 0)
 
 guitarLight.castShadow = true
 
 // Box Drums Light
-const drumsLight = new THREE.PointLight(0x9890FF, 1.2, 3)
+const drumsLight = new THREE.PointLight(0x9890ff, 1.2, 3)
 drumsLight.position.set(0, 1.05, 0)
 drumsLight.castShadow = true
 
 // Box Bass Light
-const bassLight = new THREE.PointLight(0xFFCE80, 1.2, 3)
+const bassLight = new THREE.PointLight(0xffce80, 1.2, 3)
 bassLight.position.set(0, 1.05, 0)
 bassLight.castShadow = true
 
@@ -146,6 +147,30 @@ box2.group.add(bassLight)
 box3.group.add(drumsLight)
 box4.group.add(guitarLight)
 
+/***
+ * Text inside box
+ */
+
+const fontMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 })
+const textGeometry = new THREE.TextGeometry(
+  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \n sed diam nonumy eirmod tempor invidunt ut labore \net dolore magna aliquyam erat, sed diam voluptua.\n At vero eos et accusam et justo duo dolores et ea rebum.\n Stet clita kasd gubergren, no sea takimata sanctus \n est Lorem ipsum dolor sit amet. Lorem ipsum.",
+  {
+    font: new THREE.Font(font),
+    size: 1.5,
+    height: 0.5,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 0.08,
+    bevelSize: 0.1,
+    bevelOffset: -0.08,
+    bevelSegments: 10
+  }
+)
+const text = new THREE.Mesh(textGeometry, fontMaterial)
+text.scale.set(0.05, 0.05, 0.05)
+text.position.set(-0.95, 1, 0)
+box4.group.add(text)
+
 /**
  * Camera
  */
@@ -163,14 +188,12 @@ scene.add(camera)
  */
 const renderer = new THREE.WebGLRenderer({
   alpha: true
-
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setClearAlpha(0)
 renderer.outputEncoding = THREE.sRGBEncoding
 renderer.gammaFactor = 2.2
-
 
 const canvasContainer = document.querySelector(".canvas-js")
 canvasContainer.appendChild(renderer.domElement)
@@ -428,17 +451,15 @@ function closeModal() {
   console.log("yo")
 }
 
-
 /**
  * Paralax box
  */
 
-window.addEventListener('mousemove', (_event) => {
-    const ratioX = _event.clientX / sizes.width - 0.5
-    const ratioY = _event.clientY / sizes.height - 0.5
-        const translateX = -ratioX * 1
-        const translateY = -ratioY * 1
-        camera.position.x = translateX
-        camera.position.y = translateY
-
+window.addEventListener("mousemove", _event => {
+  const ratioX = _event.clientX / sizes.width - 0.5
+  const ratioY = _event.clientY / sizes.height - 0.5
+  const translateX = -ratioX * 1
+  const translateY = -ratioY * 1
+  camera.position.x = translateX
+  camera.position.y = translateY
 })
