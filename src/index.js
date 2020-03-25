@@ -219,8 +219,10 @@ document.addEventListener("click", () => {
   }
 })
 let hoverBass = false
+let hasPlayedZoomAnimation = false
 document.addEventListener("click", () => {
-  if (hoverBass) {
+  
+  if (hoverBass && !hasPlayedZoomAnimation) {
     console.log("click sur le Bass")
 
     TweenLite.to(boxContent.position, 1, {
@@ -228,10 +230,25 @@ document.addEventListener("click", () => {
       y: boxContent.position.y -1.25,
       z: camera.position.z - 1.5,
 
-      ease: "Power3.easeInOut"
+      ease: "Power3.easeInOut",
+      
     })
+    hasPlayedZoomAnimation = true
+  } else {
+    TweenLite.to(boxContent.position, 1, {
+      x: boxContent.position.x -1.25,
+      y: boxContent.position.y +1.25,
+      z: camera.position.z - 6,
+
+      ease: "Power3.easeInOut",
+      
+    })
+    hasPlayedZoomAnimation = false
   }
 })
+
+
+
 
 
 
@@ -248,26 +265,26 @@ const loop = () => {
   const raycasterCursor = new THREE.Vector2(cursor.x * 2, -cursor.y * 2)
   raycaster.setFromCamera(raycasterCursor, camera)
 
-  const intersectsPiano = raycaster.intersectObject(piano.group, true)
+  const intersectsPiano = raycaster.intersectObject(box.group, true)
   if (intersectsPiano.length) {
     hoverPiano = true
   } else {
     hoverPiano = false
   }
 
-  const intersectsGuitar = raycaster.intersectObject(guitar.group, true)
+  const intersectsGuitar = raycaster.intersectObject(box2.group, true)
   if (intersectsGuitar.length) {
     hoverGuitar = true
   } else {
     hoverGuitar = false
   }
-  const intersectsDrums = raycaster.intersectObject(drums.group, true)
+  const intersectsDrums = raycaster.intersectObject(box3.group, true)
   if (intersectsDrums.length) {
     hoverDrums = true
   } else {
     hoverDrums = false
   }
-  const intersectsBass = raycaster.intersectObject(bass.group, true)
+  const intersectsBass = raycaster.intersectObject(box4.group, true)
   if (intersectsBass.length) {
     hoverBass = true
   } else {
