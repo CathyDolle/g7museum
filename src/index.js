@@ -53,33 +53,30 @@ let hasStarted = false
  * Lights
  */
 
-const ambientlight = new THREE.AmbientLight(0xffffff, 0.4) // soft white light
+const ambientlight = new THREE.AmbientLight(0xffffff, 0.3) // soft white light
 ambientlight.castShadow = true
 scene.add(ambientlight)
 
+
 // Box Piano Light
-const pianoLight = new THREE.PointLight(0x8b84e5, 0.4, 10)
-pianoLight.position.set(0, 1.25, 0.7)
-pianoLight.scale.set(0.25, 0.25, 0.25)
+const pianoLight = new THREE.PointLight(0x8b84e5, 2, 1.4)
+pianoLight.position.set(0, 1.05, 0)
 pianoLight.castShadow = true
 
 // Box Guitar Light
-const guitarLight = new THREE.PointLight(0xAED4FF, 0.4, 10)
-guitarLight.position.set(0, 1.25, 0.7)
-guitarLight.scale.set(0.25, 0.25, 0.25)
+const guitarLight = new THREE.PointLight(0xaed4ff, 2, 1.4)
+guitarLight.position.set(0, 1.05, 0)
+
 guitarLight.castShadow = true
 
 // Box Drums Light
-const drumsLight = new THREE.PointLight(0xFFE0AE, 0.4, 10)
-drumsLight.position.set(0, 1.25, 0.7)
-drumsLight.scale.set(0.25, 0.25, 0.25)
+const drumsLight = new THREE.PointLight(0xffe0ae, 2, 1.4)
+drumsLight.position.set(0, 1.05, 0)
 drumsLight.castShadow = true
 
-
 // Box Bass Light
-const bassLight = new THREE.PointLight(0xff0000, 0.4, 10)
-bassLight.position.set(0, 1.25, 0.7)
-bassLight.scale.set(0.25, 0.25, 0.25)
+const bassLight = new THREE.PointLight(0xff0000, 2, 1.4)
+bassLight.position.set(0, 1.05, 0)
 bassLight.castShadow = true
 
 const bassLightHelper = new THREE.PointLightHelper(bassLight)
@@ -88,10 +85,8 @@ scene.add(bassLightHelper)
 const pianoLightHelper = new THREE.PointLightHelper(pianoLight)
 scene.add(pianoLightHelper)
 
-
 const drumsLightHelper = new THREE.PointLightHelper(drumsLight)
 scene.add(drumsLightHelper)
-
 
 const guitarLightHelper = new THREE.PointLightHelper(guitarLight)
 scene.add(guitarLightHelper)
@@ -160,11 +155,13 @@ scene.add(camera)
  */
 const renderer = new THREE.WebGLRenderer({
   alpha: true
+
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setClearAlpha(0)
-renderer.shadowMap.enabled = true 
+renderer.shadowMap.enabled = true
+
 const canvasContainer = document.querySelector(".canvas-js")
 canvasContainer.appendChild(renderer.domElement)
 /**
