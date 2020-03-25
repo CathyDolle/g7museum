@@ -53,7 +53,7 @@ let hasStarted = false
  * Lights
  */
 
-const ambientlight = new THREE.AmbientLight(0xffffff, 0.7) // soft white light
+const ambientlight = new THREE.AmbientLight(0xffffff, 0.4) // soft white light
 ambientlight.castShadow = true
 scene.add(ambientlight)
 
@@ -67,23 +67,23 @@ scene.add(ambientlight)
 // scene.add(directionalLightHelper)
 
 // Box Piano Light
-const pianoLight = new THREE.PointLight(0xFFA2FB, 1, 2)
+const pianoLight = new THREE.PointLight(0xFFA2FB, 1.2, 3)
 pianoLight.position.set(0, 1.05, 0)
 pianoLight.castShadow = true
 
 // Box Guitar Light
-const guitarLight = new THREE.PointLight(0xDBB1FF, 1, 2)
+const guitarLight = new THREE.PointLight(0x6CCCFF, 1.2, 3)
 guitarLight.position.set(0, 1.05, 0)
 
 guitarLight.castShadow = true
 
 // Box Drums Light
-const drumsLight = new THREE.PointLight(0x6EDDFF, 1, 2)
+const drumsLight = new THREE.PointLight(0x9890FF, 1.2, 3)
 drumsLight.position.set(0, 1.05, 0)
 drumsLight.castShadow = true
 
 // Box Bass Light
-const bassLight = new THREE.PointLight(0xFD6868, 1, 2)
+const bassLight = new THREE.PointLight(0xFFCE80, 1.2, 3)
 bassLight.position.set(0, 1.05, 0)
 bassLight.castShadow = true
 
