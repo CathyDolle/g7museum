@@ -59,7 +59,6 @@ export default class Box {
     // })
     const boxMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff})
 
-
     const boxBottom = new THREE.BoxGeometry(2, 0.1, 2)
     const boxBottomMesh = new THREE.Mesh(boxBottom, boxMaterial)
 

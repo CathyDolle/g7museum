@@ -2,9 +2,14 @@ import "./style/main.styl"
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import Piano from "./javascript/Piano.js"
-import Guitar from "./javascript/Piano.js"
+import Guitar from "./javascript/Guitar.js"
 import Box from "./javascript/Box.js"
-import { Mesh } from "three"
+import Drums from "./javascript/Drums.js"
+import Bass from "./javascript/Bass.js"
+
+
+
+import { Mesh, Group } from "three"
 
 /**
  * Sizes
@@ -34,12 +39,12 @@ const scene = new THREE.Scene()
  * Lights
  */
 
-const ambientlight = new THREE.AmbientLight(0xffffff, 0.2) // soft white light
+const ambientlight = new THREE.AmbientLight(0xffffff, 0.8) // soft white light
 ambientlight.castShadow = true
 scene.add(ambientlight)
 
 var pianoLight = new THREE.PointLight(0x8b84e5, 1)
-pianoLight.position.set(0, 0, 0)
+pianoLight.position.set(0, 0.5, 0)
 pianoLight.castShadow = true
 
 scene.add(pianoLight)
@@ -54,10 +59,10 @@ scene.add(pianoLight)
 // directionalLeftLight.castShadow = true
 // scene.add(directionalLeftLight)
 
-// var directionalBackLight = new THREE.DirectionalLight( 0xffffff, 0.4 );
-// directionalBackLight.position.set( 0, 5, -5 );
-// directionalBackLight.castShadow = true
-// scene.add( directionalBackLight );
+var directionalBackLight = new THREE.DirectionalLight( 0xffffff, 0.4 );
+directionalBackLight.position.set( 0, 5, -5 );
+directionalBackLight.castShadow = true
+scene.add( directionalBackLight );
 
 // var directionalFrontLight = new THREE.DirectionalLight(0xffffff, 0.3)
 // directionalFrontLight.position.set(0, 0, 10)
@@ -78,15 +83,41 @@ scene.add(pianoLight)
 
 
 
+const boxContent = new Group()
+
 const box = new Box()
 box.group.position.set(0.05, -1,0)
-scene.add(box.group)
+box.group.castShadow = true
+boxContent.add(box.group)
+const box2 = new Box()
+box2.group.position.set(2.55, -1,0)
+box2.group.castShadow = true
+boxContent.add(box2.group)
+const box3 = new Box()
+box3.group.position.set(2.55, 1.45,0)
+box3.group.castShadow = true
+boxContent.add(box3.group)
+const box4 = new Box()
+box4.group.position.set(0.05, 1.45,0)
+box4.group.castShadow = true
+boxContent.add(box4.group)
+
+boxContent.position.set(-1.25, -1.25, 0)
+
+
+scene.add(boxContent)
 
 
 // //  PIANO
 
 const piano = new Piano()
-scene.add(piano.group)
+box.group.add(piano.group)
+const guitar = new Guitar()
+box2.group.add(guitar.group)
+const drums = new Drums()
+box3.group.add(drums.group)
+const bass = new Bass()
+box4.group.add(bass.group)
 
 // //  Guitar
 
@@ -116,7 +147,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   20
 )
-camera.position.z = 3
+camera.position.z = 6
 scene.add(camera)
 
 /**
@@ -126,6 +157,7 @@ const renderer = new THREE.WebGLRenderer({ alpha: true })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setClearAlpha(0)
+
 const canvasContainer = document.querySelector(".canvas-js")
 canvasContainer.appendChild(renderer.domElement)
 
@@ -149,26 +181,26 @@ window.addEventListener("resize", () => {
   renderer.setSize(sizes.width, sizes.height)
 })
 
-/**
- * Click on piano
- */
-let hoverPiano = false
-document.addEventListener("click", () => {
-  if (hoverPiano) {
-    console.log("click sur le canard")
+// /**
+//  * Click on piano
+//  */
+// let hoverPiano = false
+// document.addEventListener("click", () => {
+//   if (hoverPiano) {
+//     console.log("click sur le canard")
 
-    TweenLite.to(piano.piano.position, 1, {
-      y: piano.piano.position.y - 1,
-      x: piano.piano.position.x - 1,
-      ease: "Power3.easeInOut"
-    })
+//     TweenLite.to(piano.piano.position, 1, {
+//       y: piano.piano.position.y - 1,
+//       x: piano.piano.position.x - 1,
+//       ease: "Power3.easeInOut"
+//     })
 
-    TweenLite.to(piano.piano.rotation, 1, {
-      y: Math.PI,
-      ease: "Power3.easeInOut"
-    })
-  }
-})
+//     TweenLite.to(piano.piano.rotation, 1, {
+//       y: Math.PI,
+//       ease: "Power3.easeInOut"
+//     })
+//   }
+// })
 
 /**
  * Loop

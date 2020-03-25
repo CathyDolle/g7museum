@@ -2,7 +2,7 @@ import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js"
 
-export default class Piano {
+export default class Drums {
   constructor() {
     this.group = new THREE.Group()
 
@@ -12,12 +12,12 @@ export default class Piano {
     const gltfLoader = new GLTFLoader()
     gltfLoader.setDRACOLoader(dracoLoader)
 
-    gltfLoader.load("./models/piano/voxel_midi_controller.gltf", _gltf => {
-      console.log(_gltf)
-      this.piano = _gltf.scene.children[0]
-      this.piano.position.set(0, 0.95, 0)
-      this.piano.scale.set(0.01, 0.01, 0.01)
-      this.group.add(this.piano)
+    gltfLoader.load("./models/drums/drums.gltf", _gltf => {
+     
+      this.drums = _gltf.scene.children[0]
+      this.drums.position.set(-0.35, -1.95, 1.05)
+      this.drums.scale.set(1.5, 1.5, 1.5)
+      this.group.add(this.drums)
     })
   }
 }
