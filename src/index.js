@@ -13,19 +13,47 @@ import startWebsite from "./javascript/Start.js"
 import font from "three/examples/fonts/helvetiker_bold.typeface.json"
 
 /**
- * Sounds
+ * Sounds1
  */
 
 // PIANO
-import pianoAudio from "./audio/piano.wav"
+import pianoAudio from "./audio/sound1/piano.wav"
 // GUITAR
-import guitarAudio from "./audio/guitar.wav"
+import guitarAudio from "./audio/sound1/guitar.wav"
 // BASS
-import bassAudio from "./audio/bass.wav"
+import bassAudio from "./audio/sound1/bass.wav"
 // DRUMS
-import drumsAudio from "./audio/drums.wav"
-import drumsPercAudio from "./audio/drumsPerc.wav"
-import drumsKickAudio from "./audio/drumsKick.wav"
+import drumsAudio from "./audio/sound1/drums.wav"
+import drumsPercAudio from "./audio/sound1/drumsPerc.wav"
+import drumsKickAudio from "./audio/sound1/drumsKick.wav"
+
+/**
+ * Sounds2
+ */
+
+
+// GUITAR
+import guitarAudio2 from "./audio/sound2/mainChords.wav"
+import guitar2Audio2 from "./audio/sound2/chords.wav"
+
+// BASS
+import bassAudio2 from "./audio/sound2/bass.wav"
+// DRUMS
+import drumsAudio2 from "./audio/sound2/drums.wav"
+
+/**
+ * Sounds3
+ */
+
+
+// GUITAR
+import guitarAudio3 from "./audio/sound1/guitar.wav"
+// BASS
+import bassAudio3 from "./audio/sound1/bass.wav"
+// DRUMS
+import drumsAudio3 from "./audio/sound3/drums.wav"
+
+import drumsKickAudio3 from "./audio/sound3/drumsKick.wav"
 
 /**
  * Sizes
@@ -196,6 +224,7 @@ window.addEventListener("resize", () => {
  * AUDIO VARIABLES
  */
 
+ //SOund 1
 const pianoAudioInstance = new Audio()
 pianoAudioInstance.src = pianoAudio
 pianoAudioInstance.loop = true
@@ -221,14 +250,75 @@ const drumsPercAudioInstance = new Audio()
 drumsPercAudioInstance.src = drumsPercAudio
 drumsPercAudioInstance.loop = true
 
-const setDefaultVolume = volume => {
-  drumsAudioInstance.volume = volume
-  drumsKickAudioInstance.volume = volume
-  drumsPercAudioInstance.volume = volume
-  pianoAudioInstance.volume = volume
-  guitarAudioInstance.volume = volume
-  bassAudioInstance.volume = volume
+//Sound 2
+
+const guitarAudio2Instance = new Audio()
+guitarAudio2Instance.src = guitarAudio2
+guitarAudio2Instance.loop = true
+const guitar2Audio2Instance = new Audio()
+guitar2Audio2Instance.src = guitar2Audio2
+guitar2Audio2Instance.loop = true
+
+const bassAudio2Instance = new Audio()
+bassAudio2Instance.src = bassAudio2
+bassAudio2Instance.loop = true
+
+// DRUMS
+const drumsAudio2Instance = new Audio()
+drumsAudio2Instance.src = drumsAudio2
+drumsAudio2Instance.loop = true
+
+//Sound 3
+
+const guitarAudio3Instance = new Audio()
+guitarAudio3Instance.src = guitarAudio3
+guitarAudio3Instance.loop = true
+
+
+const bassAudio3Instance = new Audio()
+bassAudio3Instance.src = bassAudio3
+bassAudio3Instance.loop = true
+
+// DRUMS
+const drumsAudio3Instance = new Audio()
+drumsAudio3Instance.src = drumsAudio3
+drumsAudio3Instance.loop = true
+const drumsKickAudio3Instance = new Audio()
+drumsKickAudio3Instance.src = drumsKickAudio3
+drumsKickAudio3Instance.loop = true
+
+let currentSoundPlayed = 1
+
+
+const setDefaultVolume = (volume, soundNumber = 1) => {
+  if(soundNumber == 1){
+      //Sound 1
+    drumsAudioInstance.volume = volume
+    drumsKickAudioInstance.volume = volume
+    drumsPercAudioInstance.volume = volume
+    pianoAudioInstance.volume = volume
+    guitarAudioInstance.volume = volume
+    bassAudioInstance.volume = volume
+  }else if(soundNumber == 2){
+      //Sound 2
+    guitarAudio2Instance.volume = volume
+    guitar2Audio2Instance.volume = volume
+    bassAudio2Instance.volume = volume
+    drumsAudio2Instance.volume = volume
+  }else{
+      //Sound 3
+    guitarAudio3Instance.volume = volume
+    bassAudio3Instance.volume = volume
+    drumsAudio3Instance.volume = volume
+    drumsKickAudio3Instance.volume = volume
+  }
+  
+
+
+
 }
+
+
 
 // MUTE/UNMUTE
 const muteSound = document.querySelector(".mute-js")
@@ -237,30 +327,127 @@ let isMuted = false
 
 muteSound.addEventListener("click", () => {
   isMuted = false
-  setDefaultVolume(0.5)
+  setDefaultVolume(0.5, currentSoundPlayed)
   muteSound.classList.add("hidden")
   unmuteSound.classList.remove("hidden")
 })
 
 unmuteSound.addEventListener("click", () => {
   isMuted = true
-  setDefaultVolume(0)
+  setDefaultVolume(0, currentSoundPlayed)
   unmuteSound.classList.add("hidden")
   muteSound.classList.remove("hidden")
 })
 
+
+
+
 /**
- * START
+ * Slide Box 
  */
-const start = () => {
-  setDefaultVolume(0.5)
+let hasSlide = false
+
+function originalSlide( posY) {
+  TweenLite.to(box.group.position, 1, {
+    y: -1,
+    ease: "Power3.easeInOut"
+  })
+  hasSlide = false
+}
+
+function boxSlide(posY) {
+  TweenLite.to(box.group.position, 1, {
+    y: -6,
+    ease: "Power3.easeInOut"
+  })
+  hasSlide = true
+
+}
+
+const sounds = document.querySelectorAll('.sound')
+
+sounds.forEach((_sound) => { 
+ 
+  _sound.addEventListener('click', () => {
+    
+    if (_sound.getAttribute('data-value') == 'sound1') {
+      currentSoundPlayed = 1
+      stopAllSound()
+      playSound1()
+      originalSlide()
+    }else if (_sound.getAttribute('data-value') == 'sound2') {
+      currentSoundPlayed = 2
+      stopAllSound()
+      playSound2()
+      if (hasSlide === false) {
+        boxSlide()
+      }
+    }else {
+      currentSoundPlayed = 3
+      stopAllSound()
+      playSound3()
+      if (hasSlide === false) {
+        boxSlide()
+      } 
+    }
+  })
+})
+
+/**
+ * Sound Play/Pause
+ */
+
+function stopAllSound() {
   guitarAudioInstance.play()
   bassAudioInstance.play()
   pianoAudioInstance.play()
   drumsAudioInstance.play()
   drumsPercAudioInstance.play()
   drumsKickAudioInstance.play()
-  // guitarAudio.play()
+  
+  guitarAudio2Instance.pause()
+  guitar2Audio2Instance.pause()
+  bassAudio2Instance.pause()
+  drumsAudio2Instance.pause()
+
+  guitarAudio3Instance.pause()
+  bassAudio3Instance.pause()
+  drumsAudio3Instance.pause()
+  drumsKickAudio3Instance.pause()
+}
+
+
+
+  function playSound1() {
+    guitarAudioInstance.play()
+    bassAudioInstance.play()
+    pianoAudioInstance.play()
+    drumsAudioInstance.play()
+    drumsPercAudioInstance.play()
+    drumsKickAudioInstance.play()
+  }
+  function playSound2() {
+    guitarAudio2Instance.play()
+    guitar2Audio2Instance.play()
+    bassAudio2Instance.play()
+    drumsAudio2Instance.play()
+    box.group.add(pianoLight)
+  }
+  function playSound3() {
+    guitarAudio3Instance.play()
+    bassAudio3Instance.play()
+    drumsAudio3Instance.play()
+    drumsKickAudio3Instance.play()
+  }
+/**
+ * START
+ */
+const start = () => {
+  setDefaultVolume(0.5)
+
+  playSound1()
+
+
 }
 
 startWebsite(start)
@@ -284,7 +471,7 @@ function instrumentZoom(posX, posY) {
   })
   hasPlayedZoomAnimation = true
   isZooming = true
-  if (!isMuted) setDefaultVolume(0.1)
+  if (!isMuted) setDefaultVolume(0.1, currentSoundPlayed)
 }
 
 function originalZoom(posX, posY, posZ) {
@@ -300,7 +487,7 @@ function originalZoom(posX, posY, posZ) {
   })
   hasPlayedZoomAnimation = false
   isZooming = true
-  if (!isMuted) setDefaultVolume(0.5)
+  if (!isMuted) setDefaultVolume(0.5, currentSoundPlayed)
 }
 
 //PIANO
@@ -321,7 +508,16 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverGuitar && hasPlayedZoomAnimation === false) {
     instrumentZoom(-1.25, 1.25)
-    if (!isMuted) guitarAudioInstance.volume = 1
+    if (!isMuted){
+      if(currentSoundPlayed == 1){
+        guitarAudioInstance.volume = 1
+      }else if(currentSoundPlayed == 2){
+        guitarAudio2Instance.volume = 1
+        guitar2Audio2Instance.volume = 1
+      }else{
+        guitarAudio3.volume = 1
+      }
+    }
   } else if (hoverGuitar && hasPlayedZoomAnimation === true) {
     originalZoom(1.25, -1.25, -6)
   }
@@ -332,10 +528,18 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverDrums && hasPlayedZoomAnimation === false) {
     instrumentZoom(-1.25, -1.25)
-    if (!isMuted)
-      (drumsAudioInstance.volume = 1),
-        (drumsKickAudioInstance.volume = 1),
-        (drumsPercAudioInstance.volume = 1)
+    if (!isMuted){
+      if(currentSoundPlayed == 1){
+        drumsAudioInstance.volume = 1
+        drumsKickAudioInstance.volume = 1
+        drumsPercAudioInstance.volume = 1
+      }else if(currentSoundPlayed == 2){
+        drumsAudio2Instance.volume = 1
+      }else{
+        drumsAudio3Instance.volume = 1
+        drumsKickAudio3Instance.volume = 1
+      }
+    }
   } else if (hoverDrums && hasPlayedZoomAnimation === true) {
     originalZoom(1.25, 1.25, -6)
   }
@@ -346,7 +550,15 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverBass && hasPlayedZoomAnimation === false) {
     instrumentZoom(1.25, -1.25)
-    if (!isMuted) bassAudioInstance.volume = 1
+    if (!isMuted){
+      if(currentSoundPlayed == 1){
+        bassAudioInstance.volume = 1
+      }else if(currentSoundPlayed == 2){
+        bassAudio2Instance.volume = 1
+      }else{
+        bassAudio3.volume = 1
+      }
+    }
   } else if (hoverBass && hasPlayedZoomAnimation === true) {
     originalZoom(-1.25, 1.25, -6)
   }
@@ -387,13 +599,12 @@ const loop = () => {
   cameraControls.update()
 
   //Add text
-  console.log(boxContent.position.z);
+
   
   if (boxContent.position.z.toFixed(1) == 4.4){
     box.group.add(box.pianoText)
     animation.pause()
-    console.log('nique');
-    
+   
   } else{
     box.group.remove(box.pianoText)
     animation.resume()
@@ -421,7 +632,6 @@ const loop = () => {
   const intersectsDrums = raycaster.intersectObject(box3.group, true)
   if (intersectsDrums.length && hasStarted) {
     hoverDrums = true
-    console.log("hover drums")
   } else {
     hoverDrums = false
   }
@@ -474,21 +684,21 @@ closeCreditsModal.addEventListener("click", () => {
 
 function openAboutModalEvent() {
   hasStarted = false
-  if (!isMuted) setDefaultVolume(0.2)
+  if (!isMuted) setDefaultVolume(0.2, currentSoundPlayed)
   aboutModal.style.zIndex = 2
   aboutModal.classList.add("openModal")
 }
 
 function openCreditsModalEvent() {
   hasStarted = false
-  if (!isMuted) setDefaultVolume(0.2)
+  if (!isMuted) setDefaultVolume(0.2, currentSoundPlayed)
   creditsModal.style.zIndex = 2
   creditsModal.classList.add("openModal")
 }
 
 function closeCreditsModalEvent() {
   hasStarted = true
-  if (!isMuted) setDefaultVolume(0.5)
+  if (!isMuted) setDefaultVolume(0.5, currentSoundPlayed)
   creditsModal.style.zIndex = -10
   creditsModal.classList.remove("openModal")
   creditsModal.classList.add("closeModal")
@@ -503,7 +713,7 @@ function closeWelcomeModalEvent() {
 
 function closeAboutModalEvent() {
   hasStarted = true
-  if (!isMuted) setDefaultVolume(0.5)
+  if (!isMuted) setDefaultVolume(0.5, currentSoundPlayed)
   aboutModal.style.zIndex = -10
   aboutModal.classList.remove("openModal")
   aboutModal.classList.add("closeModal")
