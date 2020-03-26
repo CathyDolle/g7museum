@@ -147,30 +147,6 @@ box2.group.add(bassLight)
 box3.group.add(drumsLight)
 box4.group.add(guitarLight)
 
-/***
- * Text inside box
- */
-
-const fontMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 })
-const textGeometry = new THREE.TextGeometry(
-  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \n sed diam nonumy eirmod tempor invidunt ut labore \net dolore magna aliquyam erat, sed diam voluptua.\n At vero eos et accusam et justo duo dolores et ea rebum.\n Stet clita kasd gubergren, no sea takimata sanctus \n est Lorem ipsum dolor sit amet. Lorem ipsum.",
-  {
-    font: new THREE.Font(font),
-    size: 1.5,
-    height: 0.5,
-    curveSegments: 12,
-    bevelEnabled: true,
-    bevelThickness: 0.08,
-    bevelSize: 0.1,
-    bevelOffset: -0.08,
-    bevelSegments: 10
-  }
-)
-const text = new THREE.Mesh(textGeometry, fontMaterial)
-text.scale.set(0.05, 0.05, 0.05)
-text.position.set(-0.95, 1, 0)
-box4.group.add(text)
-
 /**
  * Camera
  */
@@ -428,28 +404,19 @@ loop()
 /**
  * MENU
  */
-
 const aboutButton = document.querySelector(".about-button-js")
-const modalAbout = document.querySelector(".modal-about-js")
-const closeModalButton = document.querySelector(".close-js")
+const aboutModal = document.querySelector(".about-modal-js")
+const closeModal = document.querySelector(".close-js")
 
 aboutButton.addEventListener("click", () => {
-  openModal()
+  aboutModal.classList.add("openModal")
+  // aboutModal.classList.remove("hidden")
 })
 
-closeModalButton.addEventListener("click", () => {
-  closeModal()
+closeModal.addEventListener("click", () => {
+  aboutModal.classList.remove("openModal")
+  aboutModal.classList.add("closeModal")
 })
-
-function openModal() {
-  modalAbout.classList.add("openModal")
-}
-
-function closeModal() {
-  modalAbout.classList.remove("openModal")
-  modalAbout.classList.add("closeModal")
-  console.log("yo")
-}
 
 /**
  * Paralax box
