@@ -471,8 +471,8 @@ function closeAboutModalEvent() {
 window.addEventListener("mousemove", _event => {
   const ratioX = _event.clientX / sizes.width - 0.5
   const ratioY = _event.clientY / sizes.height - 0.5
-  const translateX = -ratioX * 1
-  const translateY = -ratioY * 1
+  const translateX = -ratioX * 0.2
+  const translateY = -ratioY * 0.2
   camera.position.x = translateX
   camera.position.y = translateY
 })
