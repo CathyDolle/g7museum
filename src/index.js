@@ -59,15 +59,6 @@ const ambientlight = new THREE.AmbientLight(0xffffff, 0.4) // soft white light
 ambientlight.castShadow = true
 scene.add(ambientlight)
 
-// Directional Light
-// const directionalLight = new THREE.DirectionalLight(0xD8DCFF, 0.5)
-// directionalLight.position.set(0, 0, 5)
-// directionalLight.castShadow = true
-// scene.add(directionalLight)
-
-// const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
-// scene.add(directionalLightHelper)
-
 // Box Piano Light
 const pianoLight = new THREE.PointLight(0xffa2fb, 1.2, 3)
 pianoLight.position.set(0, 1.05, 0)
@@ -255,8 +246,6 @@ unmuteSound.addEventListener("click", () => {
  * START
  */
 const start = () => {
-  console.log("yo")
-  hasStarted = true
   setDefaultVolume(0.5)
   guitarAudioInstance.play()
   bassAudioInstance.play()
@@ -410,11 +399,12 @@ loop()
  */
 const aboutButton = document.querySelector(".about-button-js")
 const creditsButton = document.querySelector(".credits-button-js")
+const welcomeModal = document.querySelector(".welcome-modal-js")
 const aboutModal = document.querySelector(".about-modal-js")
 const creditsModal = document.querySelector(".credits-modal-js")
 const closeAboutModal = document.querySelector(".close-about-js")
 const closeCreditsModal = document.querySelector(".close-credits-js")
-const linkCredits = document.querySelector(".link-credits-js")
+const closeWelcomeModal = document.querySelector(".close-welcome-js")
 
 creditsButton.addEventListener("click", () => {
   openCreditsModalEvent()
@@ -422,6 +412,11 @@ creditsButton.addEventListener("click", () => {
 
 aboutButton.addEventListener("click", () => {
   openAboutModalEvent()
+})
+
+closeWelcomeModal.addEventListener("click", () => {
+  hasStarted = true
+  closeWelcomeModalEvent()
 })
 
 closeAboutModal.addEventListener("click", () => {
@@ -432,32 +427,43 @@ closeCreditsModal.addEventListener("click", () => {
   closeCreditsModalEvent()
 })
 
-linkCredits.addEventListener("click", () => {
-  closeAboutModalEvent()
-  openCreditsModalEvent()
-})
-
-function closeAboutModalEvent() {
-  aboutModal.style.zIndex = -10
-  aboutModal.classList.remove("openModal")
-  aboutModal.classList.add("closeModal")
-}
-
 function openAboutModalEvent() {
+  hasStarted = false
+  setDefaultVolume(0.2)
   aboutModal.style.zIndex = 2
   aboutModal.classList.add("openModal")
 }
 
+function openCreditsModalEvent() {
+  hasStarted = false
+  setDefaultVolume(0.2)
+  creditsModal.style.zIndex = 2
+  creditsModal.classList.add("openModal")
+}
+
 function closeCreditsModalEvent() {
+  hasStarted = true
+  setDefaultVolume(0.5)
   creditsModal.style.zIndex = -10
   creditsModal.classList.remove("openModal")
   creditsModal.classList.add("closeModal")
 }
 
-function openCreditsModalEvent() {
-  creditsModal.style.zIndex = 2
-  creditsModal.classList.add("openModal")
+function closeWelcomeModalEvent() {
+  hasStarted = true
+  welcomeModal.style.zIndex = -10
+  welcomeModal.classList.remove("openModal")
+  welcomeModal.classList.add("closeModal")
 }
+
+function closeAboutModalEvent() {
+  hasStarted = true
+  setDefaultVolume(0.5)
+  aboutModal.style.zIndex = -10
+  aboutModal.classList.remove("openModal")
+  aboutModal.classList.add("closeModal")
+}
+
 /**
  * Paralax box
  */
