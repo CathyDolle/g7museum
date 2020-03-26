@@ -326,6 +326,22 @@ const muteSound = document.querySelector(".mute-js")
 const unmuteSound = document.querySelector(".unmute-js")
 let isMuted = false
 
+muteSound.addEventListener("mouseover", () =>{
+  hasStarted = false
+})
+
+unmuteSound.addEventListener("mouseover", () =>{
+  hasStarted = false
+})
+
+muteSound.addEventListener("mouseleave", () =>{
+  hasStarted = true
+})
+
+unmuteSound.addEventListener("mouseleave", () =>{
+  hasStarted = true
+})
+
 muteSound.addEventListener("click", () => {
   isMuted = false
   setDefaultVolume(0.5, currentSoundPlayed)
