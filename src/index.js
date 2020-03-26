@@ -438,7 +438,7 @@ linkCredits.addEventListener("click", () => {
 })
 
 function closeAboutModalEvent() {
-  aboutModal.style.zIndex = 1
+  aboutModal.style.zIndex = -10
   aboutModal.classList.remove("openModal")
   aboutModal.classList.add("closeModal")
 }
@@ -449,7 +449,7 @@ function openAboutModalEvent() {
 }
 
 function closeCreditsModalEvent() {
-  creditsModal.style.zIndex = 1
+  creditsModal.style.zIndex = -10
   creditsModal.classList.remove("openModal")
   creditsModal.classList.add("closeModal")
 }
