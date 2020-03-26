@@ -495,10 +495,12 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverPiano && hasPlayedZoomAnimation === false) {
     instrumentZoom(1.25, 1.25)
-    if(currentSoundPlayed == 1){
-      pianoAudioInstance.volume = 1
-    }else if(currentSoundPlayed == 2){
-      pianoAudio2Instance.volume = 1
+    if (!isMuted){
+      if(currentSoundPlayed == 1){
+        pianoAudioInstance.volume = 1
+      }else if(currentSoundPlayed == 2){
+        pianoAudio2Instance.volume = 1
+      }
     }
   } else if (hoverPiano && hasPlayedZoomAnimation === true) {
     originalZoom(-1.25, -1.25, -6)
