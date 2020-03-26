@@ -29,7 +29,7 @@ npm run dev
 
 ## Authors
 
-👨🏻‍💼 **Cathy DOLLE**
+👩 **Cathy DOLLE**
 
 - Behance: https://www.behance.net/cathydolle
 - Github: [@CathyDolle](https://github.com/CathyDolle/)
@@ -37,10 +37,6 @@ npm run dev
 - LinkedIn: [@Cathy Dolle](https://www.linkedin.com/in/cathy-dolle-245236199/)
 
 👨🏻‍💼 **Antoine BAUDOT**
-
-## Show your support
-
-Give a ⭐️ if you liked this project!
 
 ## 📝 License
 
