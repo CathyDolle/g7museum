@@ -30,11 +30,12 @@ import drumsKickAudio from "./audio/sound1/drumsKick.wav"
 /**
  * Sounds2
  */
-
+//PIANO
+import pianoAudio2 from "./audio/sound2/piano.wav"
 
 // GUITAR
 import guitarAudio2 from "./audio/sound2/mainChords.wav"
-import guitar2Audio2 from "./audio/sound2/chords.wav"
+
 
 // BASS
 import bassAudio2 from "./audio/sound2/bass.wav"
@@ -257,9 +258,9 @@ drumsPercAudioInstance.loop = true
 const guitarAudio2Instance = new Audio()
 guitarAudio2Instance.src = guitarAudio2
 guitarAudio2Instance.loop = true
-const guitar2Audio2Instance = new Audio()
-guitar2Audio2Instance.src = guitar2Audio2
-guitar2Audio2Instance.loop = true
+const pianoAudio2Instance = new Audio()
+pianoAudio2Instance.src = pianoAudio2
+pianoAudio2Instance.loop = true
 
 const bassAudio2Instance = new Audio()
 bassAudio2Instance.src = bassAudio2
@@ -304,7 +305,7 @@ const setDefaultVolume = (volume, soundNumber = 1) => {
   }else if(soundNumber == 2){
       //Sound 2
     guitarAudio2Instance.volume = volume
-    guitar2Audio2Instance.volume = volume
+    pianoAudio2Instance.volume = volume
     bassAudio2Instance.volume = volume
     drumsAudio2Instance.volume = volume
     pianoAudioInstance.volume = 0
@@ -370,19 +371,17 @@ sounds.forEach((_sound) => {
  
   _sound.addEventListener('click', () => {
     
-    if (_sound.getAttribute('data-value') == 'sound1') {
+    if (_sound.getAttribute('data-value') == 'sound1' && !isMuted) {
       currentSoundPlayed = 1
       stopAllSound()
       playSound1()
       originalSlide()
-    }else if (_sound.getAttribute('data-value') == 'sound2') {
+    }else if (_sound.getAttribute('data-value') == 'sound2' && !isMuted) {
       currentSoundPlayed = 2
       stopAllSound()
       playSound2()
-      if (hasSlide === false) {
-        boxSlide()
-      }
-    }else {
+      originalSlide()
+    }else if(!isMuted){
       currentSoundPlayed = 3
       stopAllSound()
       playSound3()
@@ -406,7 +405,7 @@ function stopAllSound() {
   drumsKickAudioInstance.pause()
   
   guitarAudio2Instance.pause()
-  guitar2Audio2Instance.pause()
+  pianoAudio2Instance.pause()
   bassAudio2Instance.pause()
   drumsAudio2Instance.pause()
 
@@ -428,7 +427,7 @@ function stopAllSound() {
   }
   function playSound2() {
     guitarAudio2Instance.play()
-    guitar2Audio2Instance.play()
+    pianoAudio2Instance.play()
     bassAudio2Instance.play()
     drumsAudio2Instance.play()
     box.group.add(pianoLight)
@@ -496,7 +495,11 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverPiano && hasPlayedZoomAnimation === false) {
     instrumentZoom(1.25, 1.25)
-    if (!isMuted) pianoAudioInstance.volume = 1
+    if(currentSoundPlayed == 1){
+      pianoAudioInstance.volume = 1
+    }else if(currentSoundPlayed == 2){
+      pianoAudio2Instance.volume = 1
+    }
   } else if (hoverPiano && hasPlayedZoomAnimation === true) {
     originalZoom(-1.25, -1.25, -6)
   }
@@ -513,7 +516,7 @@ document.addEventListener("click", () => {
         guitarAudioInstance.volume = 1
       }else if(currentSoundPlayed == 2){
         guitarAudio2Instance.volume = 1
-        guitar2Audio2Instance.volume = 1
+        pianoAudio2.volume = 1
       }else{
         guitarAudio3.volume = 1
       }
