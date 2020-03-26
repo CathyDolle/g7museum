@@ -27,13 +27,13 @@ export default class Box {
     const boxBottom = new THREE.BoxGeometry(2, 0.1, 2)
     const boxBottomMesh = new THREE.Mesh(boxBottom, boxMaterial)
 
-    const pianoText = new THREE.Mesh(
+    this.pianoText = new THREE.Mesh(
       new THREE.BoxGeometry(2, 0.1, 2),
       new THREE.MeshStandardMaterial({ color: 0xffffff, map: pianoTextTexture })
     )
 
-    pianoText.rotateZ(Math.PI*0.5)
-    pianoText.position.set(-1.05,0.95,0)
+    this.pianoText.rotateZ(Math.PI*0.5)
+    this.pianoText.position.set(-1.05,0.95,0)
 
     const boxLeft = new THREE.BoxGeometry(2, 0.1, 2)
     const boxLeftMesh = new THREE.Mesh(boxLeft, boxMaterial)
@@ -111,7 +111,8 @@ export default class Box {
   
 
     
-    this.group.add(boxBottomMesh, boxTopMesh, boxLeftMesh, boxRightMesh, boxBackMesh, planBottomMesh, planLeftMesh, planRightMesh, planTopMesh, smallPlanTopMesh, smallPlanBottomMesh, smallPlanLeftMesh, smallPlanRightMesh, pianoText)
+    this.group.add(boxBottomMesh, boxTopMesh, boxLeftMesh, boxRightMesh, boxBackMesh, planBottomMesh, planLeftMesh, planRightMesh, planTopMesh, smallPlanTopMesh, smallPlanBottomMesh, smallPlanLeftMesh, smallPlanRightMesh)
+
     
     }
 }

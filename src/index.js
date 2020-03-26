@@ -6,7 +6,8 @@ import Guitar from "./javascript/Guitar.js"
 import Box from "./javascript/Box.js"
 import Drums from "./javascript/Drums.js"
 import Bass from "./javascript/Bass.js"
-import { TweenLite, TimelineLite } from "gsap/all"
+import { TweenLite, TimelineMax } from "gsap/all"
+
 import { Mesh, Group } from "three"
 import startWebsite from "./javascript/Start.js"
 import font from "three/examples/fonts/helvetiker_bold.typeface.json"
@@ -103,6 +104,9 @@ const boxContent = new Group()
 const box = new Box()
 box.group.position.set(0.05, -1, 0)
 box.group.castShadow = true
+
+
+
 boxContent.add(box.group)
 const box2 = new Box()
 box2.group.position.set(2.55, -1, 0)
@@ -118,6 +122,8 @@ box4.group.castShadow = true
 boxContent.add(box4.group)
 
 boxContent.position.set(-1.25, -1.25, 0)
+
+
 
 scene.add(boxContent)
 
@@ -150,6 +156,7 @@ const camera = new THREE.PerspectiveCamera(
 )
 camera.position.z = 6
 scene.add(camera)
+
 
 /**
  * Renderer
@@ -345,6 +352,31 @@ document.addEventListener("click", () => {
   }
 })
 
+/**Float */
+
+const animation = new TimelineMax()
+        animation.from(
+            boxContent.position,
+            1,
+            {
+                y: boxContent.position.y +  0.03,
+                ease: "linear"
+            }).to(
+            boxContent.position,
+            1,
+            {
+                y: boxContent.position.y -0.03,
+                ease: "linear"
+            }).to(
+            boxContent.position,
+            1,
+            {
+                y: boxContent.position.y + 0.03,
+                ease: "linear"
+            })
+
+        animation.repeat(-1)
+
 /**
  * Loop
  */
@@ -353,6 +385,19 @@ const raycaster = new THREE.Raycaster()
 const loop = () => {
   window.requestAnimationFrame(loop)
   cameraControls.update()
+
+  //Add text
+  console.log(boxContent.position.z);
+  
+  if (boxContent.position.z.toFixed(1) == 4.4){
+    box.group.add(box.pianoText)
+    animation.pause()
+    console.log('nique');
+    
+  } else{
+    box.group.remove(box.pianoText)
+    animation.resume()
+  }
 
   // Cursor raycasting
   const raycasterCursor = new THREE.Vector2(cursor.x * 2, -cursor.y * 2)
@@ -471,8 +516,8 @@ function closeAboutModalEvent() {
 window.addEventListener("mousemove", _event => {
   const ratioX = _event.clientX / sizes.width - 0.5
   const ratioY = _event.clientY / sizes.height - 0.5
-  const translateX = -ratioX * 0.2
-  const translateY = -ratioY * 0.2
+  const translateX = -ratioX * 0.4
+  const translateY = -ratioY * 0.4
   camera.position.x = translateX
   camera.position.y = translateY
 })
