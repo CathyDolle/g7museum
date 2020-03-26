@@ -429,21 +429,21 @@ closeCreditsModal.addEventListener("click", () => {
 
 function openAboutModalEvent() {
   hasStarted = false
-  setDefaultVolume(0.2)
+  if (!isMuted) setDefaultVolume(0.2)
   aboutModal.style.zIndex = 2
   aboutModal.classList.add("openModal")
 }
 
 function openCreditsModalEvent() {
   hasStarted = false
-  setDefaultVolume(0.2)
+  if (!isMuted) setDefaultVolume(0.2)
   creditsModal.style.zIndex = 2
   creditsModal.classList.add("openModal")
 }
 
 function closeCreditsModalEvent() {
   hasStarted = true
-  setDefaultVolume(0.5)
+  if (!isMuted) setDefaultVolume(0.5)
   creditsModal.style.zIndex = -10
   creditsModal.classList.remove("openModal")
   creditsModal.classList.add("closeModal")
@@ -458,7 +458,7 @@ function closeWelcomeModalEvent() {
 
 function closeAboutModalEvent() {
   hasStarted = true
-  setDefaultVolume(0.5)
+  if (!isMuted) setDefaultVolume(0.5)
   aboutModal.style.zIndex = -10
   aboutModal.classList.remove("openModal")
   aboutModal.classList.add("closeModal")
