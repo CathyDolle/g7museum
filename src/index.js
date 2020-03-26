@@ -48,9 +48,9 @@ import drumsAudio2 from "./audio/sound2/drums.wav"
 
 
 // GUITAR
-import guitarAudio3 from "./audio/sound1/guitar.wav"
+import guitarAudio3 from "./audio/sound3/guitar.wav"
 // BASS
-import bassAudio3 from "./audio/sound1/bass.wav"
+import bassAudio3 from "./audio/sound3/bass.wav"
 // DRUMS
 import drumsAudio3 from "./audio/sound3/drums.wav"
 
@@ -518,7 +518,7 @@ document.addEventListener("click", () => {
         guitarAudio2Instance.volume = 1
         pianoAudio2.volume = 1
       }else{
-        guitarAudio3.volume = 1
+        guitarAudio3Instance.volume = 1
       }
     }
   } else if (hoverGuitar && hasPlayedZoomAnimation === true) {
@@ -559,7 +559,7 @@ document.addEventListener("click", () => {
       }else if(currentSoundPlayed == 2){
         bassAudio2Instance.volume = 1
       }else{
-        bassAudio3.volume = 1
+        bassAudio3Instance.volume = 1
       }
     }
   } else if (hoverBass && hasPlayedZoomAnimation === true) {
@@ -610,6 +610,30 @@ const loop = () => {
    
   } else{
     box.group.remove(box.pianoText)
+    animation.resume()
+  }
+  if (boxContent.position.z.toFixed(1) == 4.4){
+    box4.group.add(box.bassText)
+    animation.pause()
+   
+  } else{
+    box4.group.remove(box.bassText)
+    animation.resume()
+  }
+  if (boxContent.position.z.toFixed(1) == 4.4){
+    box3.group.add(box.drumsText)
+    animation.pause()
+   
+  } else{
+    box3.group.remove(box.drumsText)
+    animation.resume()
+  }
+  if (boxContent.position.z.toFixed(1) == 4.4){
+    box2.group.add(box.guitarText)
+    animation.pause()
+   
+  } else{
+    box2.group.remove(box.guitarText)
     animation.resume()
   }
 

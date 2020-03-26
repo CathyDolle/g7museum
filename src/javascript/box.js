@@ -9,12 +9,20 @@ import {
 } from "three/examples/jsm/loaders/DRACOLoader.js"
 
 import pianoTextSource from './../images/texturePiano.png'
+import bassTextSource from './../images/textureBass.png'
+import drumsTextSource from './../images/textureDrums.png'
+import guitarTextSource from './../images/textureGuitar.png'
+
 
 /**
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
 const pianoTextTexture = textureLoader.load(pianoTextSource)
+const bassTextTexture = textureLoader.load(bassTextSource)
+const drumsTextTexture = textureLoader.load(drumsTextSource)
+const guitarTextTexture = textureLoader.load(guitarTextSource)
+
 
 
 export default class Box {
@@ -31,9 +39,27 @@ export default class Box {
       new THREE.BoxGeometry(2, 0.1, 2),
       new THREE.MeshStandardMaterial({ color: 0xffffff, map: pianoTextTexture })
     )
+    this.bassText = new THREE.Mesh(
+      new THREE.BoxGeometry(2, 0.1, 2),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, map: bassTextTexture })
+    )
+    this.drumsText = new THREE.Mesh(
+      new THREE.BoxGeometry(2, 0.1, 2),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, map: drumsTextTexture })
+    )
+    this.guitarText = new THREE.Mesh(
+      new THREE.BoxGeometry(2, 0.1, 2),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, map: guitarTextTexture })
+    )
 
     this.pianoText.rotateZ(Math.PI*0.5)
     this.pianoText.position.set(-1.05,0.95,0)
+    this.bassText.rotateZ(Math.PI*0.5)
+    this.bassText.position.set(-1.05,0.95,0)
+    this.drumsText.rotateZ(Math.PI*0.5)
+    this.drumsText.position.set(-1.05,0.95,0)
+    this.guitarText.rotateZ(Math.PI*0.5)
+    this.guitarText.position.set(-1.05,0.95,0)
 
     const boxLeft = new THREE.BoxGeometry(2, 0.1, 2)
     const boxLeftMesh = new THREE.Mesh(boxLeft, boxMaterial)
