@@ -14,6 +14,7 @@ import font from "three/examples/fonts/helvetiker_bold.typeface.json"
 /**
  * Sounds
  */
+
 // PIANO
 import pianoAudio from "./audio/piano.wav"
 // GUITAR
@@ -405,22 +406,58 @@ const loop = () => {
 loop()
 
 /**
- * MENU
+ * MENU / CREDITS / ABOUT
  */
 const aboutButton = document.querySelector(".about-button-js")
+const creditsButton = document.querySelector(".credits-button-js")
 const aboutModal = document.querySelector(".about-modal-js")
-const closeModal = document.querySelector(".close-js")
+const creditsModal = document.querySelector(".credits-modal-js")
+const closeAboutModal = document.querySelector(".close-about-js")
+const closeCreditsModal = document.querySelector(".close-credits-js")
+const linkCredits = document.querySelector(".link-credits-js")
+
+creditsButton.addEventListener("click", () => {
+  openCreditsModalEvent()
+})
 
 aboutButton.addEventListener("click", () => {
-  aboutModal.classList.add("openModal")
-  // aboutModal.classList.remove("hidden")
+  openAboutModalEvent()
 })
 
-closeModal.addEventListener("click", () => {
+closeAboutModal.addEventListener("click", () => {
+  closeAboutModalEvent()
+})
+
+closeCreditsModal.addEventListener("click", () => {
+  closeCreditsModalEvent()
+})
+
+linkCredits.addEventListener("click", () => {
+  closeAboutModalEvent()
+  openCreditsModalEvent()
+})
+
+function closeAboutModalEvent() {
+  aboutModal.style.zIndex = 1
   aboutModal.classList.remove("openModal")
   aboutModal.classList.add("closeModal")
-})
+}
 
+function openAboutModalEvent() {
+  aboutModal.style.zIndex = 2
+  aboutModal.classList.add("openModal")
+}
+
+function closeCreditsModalEvent() {
+  creditsModal.style.zIndex = 1
+  creditsModal.classList.remove("openModal")
+  creditsModal.classList.add("closeModal")
+}
+
+function openCreditsModalEvent() {
+  creditsModal.style.zIndex = 2
+  creditsModal.classList.add("openModal")
+}
 /**
  * Paralax box
  */
