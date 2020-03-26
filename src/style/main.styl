@@ -209,6 +209,7 @@ img.unmute{
         position absolute
         top 0
         padding 40px
+        width 100vw
         display flex
         justify-content flex-start
         align-items center
@@ -230,6 +231,21 @@ img.unmute{
             letter-spacing 3px
             margin 0px 10px 0px 10px
             cursor pointer
+
+        .sound
+            transition-duration 0.2s
+            color #95A0F5
+            &:hover
+                color black
+
+        .soundActive
+            color black
+
+        .sounds
+            position absolute 
+            right 30px
+            display flex
+            flex-direction row
 
         span
             margin-top 2px
