@@ -335,7 +335,10 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverDrums && hasPlayedZoomAnimation === false) {
     instrumentZoom(-1.25, -1.25)
-    if (!isMuted) drumsAudioInstance.volume = 1
+    if (!isMuted)
+      (drumsAudioInstance.volume = 1),
+        (drumsKickAudioInstance.volume = 1),
+        (drumsPercAudioInstance.volume = 1)
   } else if (hoverDrums && hasPlayedZoomAnimation === true) {
     originalZoom(1.25, 1.25, -6)
   }
