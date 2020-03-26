@@ -109,17 +109,19 @@ const bassLight = new THREE.PointLight(0xffce80, 1.2, 3)
 bassLight.position.set(0, 1.05, 0)
 bassLight.castShadow = true
 
-const bassLightHelper = new THREE.PointLightHelper(bassLight)
-scene.add(bassLightHelper)
+// HELPERS
 
-const pianoLightHelper = new THREE.PointLightHelper(pianoLight)
-scene.add(pianoLightHelper)
+// const bassLightHelper = new THREE.PointLightHelper(bassLight)
+// scene.add(bassLightHelper)
 
-const drumsLightHelper = new THREE.PointLightHelper(drumsLight)
-scene.add(drumsLightHelper)
+// const pianoLightHelper = new THREE.PointLightHelper(pianoLight)
+// scene.add(pianoLightHelper)
 
-const guitarLightHelper = new THREE.PointLightHelper(guitarLight)
-scene.add(guitarLightHelper)
+// const drumsLightHelper = new THREE.PointLightHelper(drumsLight)
+// scene.add(drumsLightHelper)
+
+// const guitarLightHelper = new THREE.PointLightHelper(guitarLight)
+// scene.add(guitarLightHelper)
 
 /**
  * Objects
@@ -305,17 +307,15 @@ const setDefaultVolume = (volume, soundNumber = 1) => {
     guitar2Audio2Instance.volume = volume
     bassAudio2Instance.volume = volume
     drumsAudio2Instance.volume = volume
+    pianoAudioInstance.volume = 0
   }else{
       //Sound 3
     guitarAudio3Instance.volume = volume
     bassAudio3Instance.volume = volume
     drumsAudio3Instance.volume = volume
     drumsKickAudio3Instance.volume = volume
+    pianoAudioInstance.volume = 0
   }
-  
-
-
-
 }
 
 
@@ -398,12 +398,12 @@ sounds.forEach((_sound) => {
  */
 
 function stopAllSound() {
-  guitarAudioInstance.play()
-  bassAudioInstance.play()
-  pianoAudioInstance.play()
-  drumsAudioInstance.play()
-  drumsPercAudioInstance.play()
-  drumsKickAudioInstance.play()
+  guitarAudioInstance.pause()
+  bassAudioInstance.pause()
+  pianoAudioInstance.pause()
+  drumsAudioInstance.pause()
+  drumsPercAudioInstance.pause()
+  drumsKickAudioInstance.pause()
   
   guitarAudio2Instance.pause()
   guitar2Audio2Instance.pause()
