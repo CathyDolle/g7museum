@@ -382,8 +382,10 @@ sounds.forEach(_sound => {
       stopAllSound()
       playSound2()
       originalSlide()
+      setDefaultVolume(1, currentSoundPlayed)
     } else if (!isMuted) {
       currentSoundPlayed = 3
+      setDefaultVolume(1, currentSoundPlayed)
       stopAllSound()
       playSound3()
       if (hasSlide === false) {
@@ -403,10 +405,13 @@ sounds.forEach(_sound => {
       setDefaultVolume(0, currentSoundPlayed)
     }else if(_sound.getAttribute("data-value") == "sound3" && isMuted){
       currentSoundPlayed = 3
+      isMuted = true
       stopAllSound()
       playSound3()
-      boxSlide()
       setDefaultVolume(0, currentSoundPlayed)
+      if (hasSlide === false) {
+        boxSlide()
+      }
     }
   })
 })
