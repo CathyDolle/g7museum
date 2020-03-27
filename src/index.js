@@ -586,7 +586,7 @@ document.addEventListener("click", () => {
 
 /**Float */
 
-const animation = new TimelineMax()
+const animation = new TimelineMax({yoyo : true, repeat : -1})
 animation
   .from(boxContent.position, 1, {
     y: boxContent.position.y + 0.03,
@@ -600,8 +600,6 @@ animation
     y: boxContent.position.y + 0.03,
     ease: "linear"
   })
-
-animation.repeat(-1)
 
 /**
  * Loop
