@@ -738,11 +738,14 @@ function closeAboutModalEvent() {
  * Paralax box
  */
 
+
 window.addEventListener("mousemove", _event => {
+  let multipleRatio = 0.4
+  if(boxContent.position.z.toFixed(1) == 4.4) multipleRatio = 0.05
   const ratioX = _event.clientX / sizes.width - 0.5
   const ratioY = _event.clientY / sizes.height - 0.5
-  const translateX = -ratioX * 0.4
-  const translateY = -ratioY * 0.4
+  const translateX = -ratioX * multipleRatio
+  const translateY = -ratioY * multipleRatio
   camera.position.x = translateX
   camera.position.y = translateY
 })
