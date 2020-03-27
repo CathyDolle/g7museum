@@ -36,7 +36,6 @@ import pianoAudio2 from "./audio/sound2/piano.wav"
 // GUITAR
 import guitarAudio2 from "./audio/sound2/mainChords.wav"
 
-
 // BASS
 import bassAudio2 from "./audio/sound2/bass.wav"
 // DRUMS
@@ -45,7 +44,6 @@ import drumsAudio2 from "./audio/sound2/drums.wav"
 /**
  * Sounds3
  */
-
 
 // GUITAR
 import guitarAudio3 from "./audio/sound3/guitar.wav"
@@ -136,8 +134,6 @@ const box = new Box()
 box.group.position.set(0.05, -1, 0)
 box.group.castShadow = true
 
-
-
 boxContent.add(box.group)
 const box2 = new Box()
 box2.group.position.set(2.55, -1, 0)
@@ -153,8 +149,6 @@ box4.group.castShadow = true
 boxContent.add(box4.group)
 
 boxContent.position.set(-1.25, -1.25, 0)
-
-
 
 scene.add(boxContent)
 
@@ -187,7 +181,6 @@ const camera = new THREE.PerspectiveCamera(
 )
 camera.position.z = 6
 scene.add(camera)
-
 
 /**
  * Renderer
@@ -227,7 +220,7 @@ window.addEventListener("resize", () => {
  * AUDIO VARIABLES
  */
 
- //SOund 1
+//SOund 1
 const pianoAudioInstance = new Audio()
 pianoAudioInstance.src = pianoAudio
 pianoAudioInstance.loop = true
@@ -277,7 +270,6 @@ const guitarAudio3Instance = new Audio()
 guitarAudio3Instance.src = guitarAudio3
 guitarAudio3Instance.loop = true
 
-
 const bassAudio3Instance = new Audio()
 bassAudio3Instance.src = bassAudio3
 bassAudio3Instance.loop = true
@@ -292,25 +284,24 @@ drumsKickAudio3Instance.loop = true
 
 let currentSoundPlayed = 1
 
-
 const setDefaultVolume = (volume, soundNumber = 1) => {
-  if(soundNumber == 1){
-      //Sound 1
+  if (soundNumber == 1) {
+    //Sound 1
     drumsAudioInstance.volume = volume
     drumsKickAudioInstance.volume = volume
     drumsPercAudioInstance.volume = volume
     pianoAudioInstance.volume = volume
     guitarAudioInstance.volume = volume
     bassAudioInstance.volume = volume
-  }else if(soundNumber == 2){
-      //Sound 2
+  } else if (soundNumber == 2) {
+    //Sound 2
     guitarAudio2Instance.volume = volume
     pianoAudio2Instance.volume = volume
     bassAudio2Instance.volume = volume
     drumsAudio2Instance.volume = volume
     pianoAudioInstance.volume = 0
-  }else{
-      //Sound 3
+  } else {
+    //Sound 3
     guitarAudio3Instance.volume = volume
     bassAudio3Instance.volume = volume
     drumsAudio3Instance.volume = volume
@@ -319,26 +310,24 @@ const setDefaultVolume = (volume, soundNumber = 1) => {
   }
 }
 
-
-
 // MUTE/UNMUTE
 const muteSound = document.querySelector(".mute-js")
 const unmuteSound = document.querySelector(".unmute-js")
 let isMuted = false
 
-muteSound.addEventListener("mouseover", () =>{
+muteSound.addEventListener("mouseover", () => {
   hasStarted = false
 })
 
-unmuteSound.addEventListener("mouseover", () =>{
+unmuteSound.addEventListener("mouseover", () => {
   hasStarted = false
 })
 
-muteSound.addEventListener("mouseleave", () =>{
+muteSound.addEventListener("mouseleave", () => {
   hasStarted = true
 })
 
-unmuteSound.addEventListener("mouseleave", () =>{
+unmuteSound.addEventListener("mouseleave", () => {
   hasStarted = true
 })
 
@@ -356,15 +345,12 @@ unmuteSound.addEventListener("click", () => {
   muteSound.classList.remove("hidden")
 })
 
-
-
-
 /**
- * Slide Box 
+ * Slide Box
  */
 let hasSlide = false
 
-function originalSlide( posY) {
+function originalSlide(posY) {
   TweenLite.to(box.group.position, 1, {
     y: -1,
     ease: "Power3.easeInOut"
@@ -378,32 +364,31 @@ function boxSlide(posY) {
     ease: "Power3.easeInOut"
   })
   hasSlide = true
-
 }
 
-const sounds = document.querySelectorAll('.sound')
+const sounds = document.querySelectorAll(".sound")
 
-sounds.forEach((_sound) => { 
- 
-  _sound.addEventListener('click', () => {
-    
-    if (_sound.getAttribute('data-value') == 'sound1' && !isMuted) {
+sounds.forEach(_sound => {
+  _sound.addEventListener("click", () => {
+    document.querySelector(".soundActive").classList.remove("soundActive")
+    _sound.classList.add("soundActive")
+    if (_sound.getAttribute("data-value") == "sound1" && !isMuted) {
       currentSoundPlayed = 1
       stopAllSound()
       playSound1()
       originalSlide()
-    }else if (_sound.getAttribute('data-value') == 'sound2' && !isMuted) {
+    } else if (_sound.getAttribute("data-value") == "sound2" && !isMuted) {
       currentSoundPlayed = 2
       stopAllSound()
       playSound2()
       originalSlide()
-    }else if(!isMuted){
+    } else if (!isMuted) {
       currentSoundPlayed = 3
       stopAllSound()
       playSound3()
       if (hasSlide === false) {
         boxSlide()
-      } 
+      }
     }
   })
 })
@@ -419,7 +404,7 @@ function stopAllSound() {
   drumsAudioInstance.pause()
   drumsPercAudioInstance.pause()
   drumsKickAudioInstance.pause()
-  
+
   guitarAudio2Instance.pause()
   pianoAudio2Instance.pause()
   bassAudio2Instance.pause()
@@ -431,29 +416,27 @@ function stopAllSound() {
   drumsKickAudio3Instance.pause()
 }
 
-
-
-  function playSound1() {
-    guitarAudioInstance.play()
-    bassAudioInstance.play()
-    pianoAudioInstance.play()
-    drumsAudioInstance.play()
-    drumsPercAudioInstance.play()
-    drumsKickAudioInstance.play()
-  }
-  function playSound2() {
-    guitarAudio2Instance.play()
-    pianoAudio2Instance.play()
-    bassAudio2Instance.play()
-    drumsAudio2Instance.play()
-    box.group.add(pianoLight)
-  }
-  function playSound3() {
-    guitarAudio3Instance.play()
-    bassAudio3Instance.play()
-    drumsAudio3Instance.play()
-    drumsKickAudio3Instance.play()
-  }
+function playSound1() {
+  guitarAudioInstance.play()
+  bassAudioInstance.play()
+  pianoAudioInstance.play()
+  drumsAudioInstance.play()
+  drumsPercAudioInstance.play()
+  drumsKickAudioInstance.play()
+}
+function playSound2() {
+  guitarAudio2Instance.play()
+  pianoAudio2Instance.play()
+  bassAudio2Instance.play()
+  drumsAudio2Instance.play()
+  box.group.add(pianoLight)
+}
+function playSound3() {
+  guitarAudio3Instance.play()
+  bassAudio3Instance.play()
+  drumsAudio3Instance.play()
+  drumsKickAudio3Instance.play()
+}
 /**
  * START
  */
@@ -461,8 +444,6 @@ const start = () => {
   setDefaultVolume(0.5)
 
   playSound1()
-
-
 }
 
 startWebsite(start)
@@ -511,10 +492,10 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverPiano && hasPlayedZoomAnimation === false) {
     instrumentZoom(1.25, 1.25)
-    if (!isMuted){
-      if(currentSoundPlayed == 1){
+    if (!isMuted) {
+      if (currentSoundPlayed == 1) {
         pianoAudioInstance.volume = 1
-      }else if(currentSoundPlayed == 2){
+      } else if (currentSoundPlayed == 2) {
         pianoAudio2Instance.volume = 1
       }
     }
@@ -529,13 +510,13 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverGuitar && hasPlayedZoomAnimation === false) {
     instrumentZoom(-1.25, 1.25)
-    if (!isMuted){
-      if(currentSoundPlayed == 1){
+    if (!isMuted) {
+      if (currentSoundPlayed == 1) {
         guitarAudioInstance.volume = 1
-      }else if(currentSoundPlayed == 2){
+      } else if (currentSoundPlayed == 2) {
         guitarAudio2Instance.volume = 1
         pianoAudio2.volume = 1
-      }else{
+      } else {
         guitarAudio3Instance.volume = 1
       }
     }
@@ -549,14 +530,14 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverDrums && hasPlayedZoomAnimation === false) {
     instrumentZoom(-1.25, -1.25)
-    if (!isMuted){
-      if(currentSoundPlayed == 1){
+    if (!isMuted) {
+      if (currentSoundPlayed == 1) {
         drumsAudioInstance.volume = 1
         drumsKickAudioInstance.volume = 1
         drumsPercAudioInstance.volume = 1
-      }else if(currentSoundPlayed == 2){
+      } else if (currentSoundPlayed == 2) {
         drumsAudio2Instance.volume = 1
-      }else{
+      } else {
         drumsAudio3Instance.volume = 1
         drumsKickAudio3Instance.volume = 1
       }
@@ -571,12 +552,12 @@ document.addEventListener("click", () => {
   if (isZooming) return
   if (hoverBass && hasPlayedZoomAnimation === false) {
     instrumentZoom(1.25, -1.25)
-    if (!isMuted){
-      if(currentSoundPlayed == 1){
+    if (!isMuted) {
+      if (currentSoundPlayed == 1) {
         bassAudioInstance.volume = 1
-      }else if(currentSoundPlayed == 2){
+      } else if (currentSoundPlayed == 2) {
         bassAudio2Instance.volume = 1
-      }else{
+      } else {
         bassAudio3Instance.volume = 1
       }
     }
@@ -588,27 +569,21 @@ document.addEventListener("click", () => {
 /**Float */
 
 const animation = new TimelineMax()
-        animation.from(
-            boxContent.position,
-            1,
-            {
-                y: boxContent.position.y +  0.03,
-                ease: "linear"
-            }).to(
-            boxContent.position,
-            1,
-            {
-                y: boxContent.position.y -0.03,
-                ease: "linear"
-            }).to(
-            boxContent.position,
-            1,
-            {
-                y: boxContent.position.y + 0.03,
-                ease: "linear"
-            })
+animation
+  .from(boxContent.position, 1, {
+    y: boxContent.position.y + 0.03,
+    ease: "linear"
+  })
+  .to(boxContent.position, 1, {
+    y: boxContent.position.y - 0.03,
+    ease: "linear"
+  })
+  .to(boxContent.position, 1, {
+    y: boxContent.position.y + 0.03,
+    ease: "linear"
+  })
 
-        animation.repeat(-1)
+animation.repeat(-1)
 
 /**
  * Loop
@@ -621,36 +596,31 @@ const loop = () => {
 
   //Add text
 
-  
-  if (boxContent.position.z.toFixed(1) == 4.4){
+  if (boxContent.position.z.toFixed(1) == 4.4) {
     box.group.add(box.pianoText)
     animation.pause()
-   
-  } else{
+  } else {
     box.group.remove(box.pianoText)
     animation.resume()
   }
-  if (boxContent.position.z.toFixed(1) == 4.4){
+  if (boxContent.position.z.toFixed(1) == 4.4) {
     box4.group.add(box.bassText)
     animation.pause()
-   
-  } else{
+  } else {
     box4.group.remove(box.bassText)
     animation.resume()
   }
-  if (boxContent.position.z.toFixed(1) == 4.4){
+  if (boxContent.position.z.toFixed(1) == 4.4) {
     box3.group.add(box.drumsText)
     animation.pause()
-   
-  } else{
+  } else {
     box3.group.remove(box.drumsText)
     animation.resume()
   }
-  if (boxContent.position.z.toFixed(1) == 4.4){
+  if (boxContent.position.z.toFixed(1) == 4.4) {
     box2.group.add(box.guitarText)
     animation.pause()
-   
-  } else{
+  } else {
     box2.group.remove(box.guitarText)
     animation.resume()
   }

@@ -38,6 +38,11 @@ npm run dev
 
 👨🏻‍💼 **Antoine BAUDOT**
 
+- Behance: https://www.behance.net/antoinebaudot
+- Github: [@AntoineBaudot](https://github.com/AntoineBaudot)
+- Twitter: [@antoine_baudot](https://twitter.com/antoine_baudot)
+- LinkedIn: [@Antoine Baudot](https://www.linkedin.com/in/antoinebaudot/)
+
 ## 📝 License
 
 Copyright © 2020 [Cathy Dolle, Antoine Baudot, Julien Brunin](https://github.com/CathyDolle/).
