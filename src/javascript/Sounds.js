@@ -238,7 +238,7 @@ export const soundHandler = (box, menuCurrentSoundPlayedCallback, callback) => {
 
   function boxSlide(box) {
     TweenLite.to(box.group.position, 1, {
-      y: -6,
+      y: -6.5,
       ease: "Power3.easeInOut"
     })
     hasSlide = true
