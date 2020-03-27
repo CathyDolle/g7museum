@@ -1,5 +1,4 @@
 // FONTS
-
 @font-face {
     font-family: 'Lato';
     src: url('../fonts/Lato-Light.woff2') format('woff2'),
@@ -24,10 +23,6 @@
     font-style: normal;
 }
 
-
-html
-    scroll-behavior: smooth;
-
 *
     margin 0
     padding 0
@@ -37,9 +32,6 @@ html
 body 
     overflow hidden
     background linear-gradient(#D5D9FF, #C2C8FC)
-    // background #0D0C0D
-    // pointer-events none
-    // cursor none
 
 /**
  * TYPO
@@ -61,39 +53,30 @@ b
     font-weight 400
 
 /**
- * CURSOR
- */
-
-.cursor-container 
-  .pointer 
-    width 5pt
-    height 5pt
-    background black;
-    border-radius 50%
-    position absolute
-    top -2.5pt
-    left -2.5pt
-    transform translate(0, 0)
-    transition all 0.05s ease
-  .cursor-wrapper 
-    // z-index: 1;
-    position absolute
-    top -15pt
-    left -15pt
-    transform translate(0, 0)
-    width 30pt
-    height 30pt
-    transition all 0.1s ease
-    .cursor 
-      width 30pt
-      height 30pt
-      border 1pt solid black
-      border-radius 50%
- 
-
-/**
  * START
  */ 
+
+// Start background
+.start
+    z-index 10
+    position absolute
+    background linear-gradient(#D5D9FF, #C2C8FC)
+    width 100vw
+    height 100vh
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center   
+    font-family lato
+    will-change transform
+
+    p
+        color white
+        font-size 20px
+        text-transform uppercase
+        letter-spacing 3px
+        font-weight 800
+
 
 button 
         background #AFB8FF
@@ -123,29 +106,10 @@ button.okay
             background white 
             color #FF93BC
 
-.start
-    z-index 10
-    position absolute
-    background linear-gradient(#D5D9FF, #C2C8FC)
-    width 100vw
-    height 100vh
-    display flex
-    flex-direction column
-    justify-content center
-    align-items center   
-    font-family lato
-    will-change transform
-
-    p
-        color white
-        font-size 20px
-        text-transform uppercase
-        letter-spacing 3px
-        font-weight 800
-
 /**
  * CANVAS
  */
+
 .canvas
      position absolute
     z-index 3
@@ -174,10 +138,11 @@ img.unmute{
     height 20px
     cursor pointer
 }
-/*
- * CONTAINER MENU
- */
 
+/*
+ * CONTAINER 
+ */
+// Background
 .background
     z-index -2
     position absolute
@@ -196,6 +161,7 @@ img.unmute{
         color #AFB8FF
         line-height 200px
 
+// Container > Header
 .container
     width 100vw
     height 100vh
@@ -232,6 +198,7 @@ img.unmute{
             margin 0px 10px 0px 10px
             cursor pointer
 
+        // Sounds menu
         .sound
             transition-duration 0.2s
             color #95A0F5
@@ -251,6 +218,7 @@ img.unmute{
             margin-top 2px
             font-weight 1000
 
+    // Modals
     .modal
         z-index -10
         display flex
@@ -294,7 +262,8 @@ img.unmute{
             align-items center
             width 45%
             height auto
-        
+
+            // Close modal
             .close
                 position absolute
                 right -50px
@@ -320,6 +289,8 @@ img.unmute{
     display none
     }
 
+// ANIMATIONS CLASS
+
 .fadeOut
     animation-name fadeOut
     animation-duration 1s
@@ -335,6 +306,8 @@ img.unmute{
     animation-name openModal
     animation-duration 0.4s
     animation-fill-mode forwards
+
+// ANIMATIONS KEYFRAMES
 
 @keyframes fadeOut{
     0%{
