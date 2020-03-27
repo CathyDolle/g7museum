@@ -10,6 +10,10 @@
     />
     <link rel="icon" href="favicon.svg" />
     <title>Lofi Music Museum</title>
+    <meta
+      name="description"
+      content="Welcome to our little museum ! Its purpose is to offer a relaxing musical experience around “lofi” music."
+    />
   </head>
   <body>
     <!-- START -->
@@ -23,8 +27,16 @@
       <h1>Music Instruments Museum</h1>
     </section>
     <!-- MUTE/UNMUTE BUTTONS -->
-    <img class="unmute unmute-js" src="./images/unmute.svg" alt="mute" />
-    <img class="mute mute-js hidden" src="./images/mute.svg" alt="mute" />
+    <img
+      class="unmute unmute-js"
+      src="./images/controls/unmute.svg"
+      alt="unmute"
+    />
+    <img
+      class="mute mute-js hidden"
+      src="./images/controls/mute.svg"
+      alt="mute"
+    />
     <!-- CONTAINER -->
     <section class="container">
       <!-- HEADER -->
@@ -32,9 +44,11 @@
         <a href="index.html">
           <img class="logo" src="./images/logo.svg" alt="logo" />
         </a>
+        <!-- Left menu -->
         <h2 class="about-button-js">About</h2>
         <span>|</span>
         <h2 class="credits-button-js">Credits</h2>
+        <!-- Sounds menu -->
         <div class="sounds">
           <h2 class="sound soundActive" data-value="sound1">Sound1</h2>
           <h2 class="sound" data-value="sound2">Sound2</h2>
@@ -70,7 +84,7 @@
           </p>
           <img
             class="close close-about-js"
-            src="./images/close.svg"
+            src="./images/controls/close.svg"
             alt="close"
           />
         </div>
@@ -109,7 +123,7 @@
           </p>
           <img
             class="close close-credits-js"
-            src="./images/close.svg"
+            src="./images/controls/close.svg"
             alt="close"
           />
         </div>

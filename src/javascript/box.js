@@ -1,8 +1,8 @@
 import * as THREE from "three"
-import pianoTextSource from "./../images/texturePiano.png"
-import bassTextSource from "./../images/textureBass.png"
-import drumsTextSource from "./../images/textureDrums.png"
-import guitarTextSource from "./../images/textureGuitar.png"
+import pianoTextSource from "./../images/textures/texturePiano.png"
+import bassTextSource from "./../images/textures/textureBass.png"
+import drumsTextSource from "./../images/textures/textureDrums.png"
+import guitarTextSource from "./../images/textures/textureGuitar.png"
 
 /**
  * Textures
