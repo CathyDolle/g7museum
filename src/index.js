@@ -754,7 +754,7 @@ function closeAboutModalEvent() {
 
 
 window.addEventListener("mousemove", _event => {
-  let multipleRatio = 0.4
+  let multipleRatio = 0.1
   if(boxContent.position.z.toFixed(1) == 4.4) multipleRatio = 0.05
   const ratioX = _event.clientX / sizes.width - 0.5
   const ratioY = _event.clientY / sizes.height - 0.5
