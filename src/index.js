@@ -441,6 +441,7 @@ function playSound1() {
   drumsAudioInstance.play()
   drumsPercAudioInstance.play()
   drumsKickAudioInstance.play()
+  setDefaultVolume(0.5)
 }
 function playSound2() {
   guitarAudio2Instance.play()
@@ -448,18 +449,19 @@ function playSound2() {
   bassAudio2Instance.play()
   drumsAudio2Instance.play()
   box.group.add(pianoLight)
+  setDefaultVolume(0.5)
 }
 function playSound3() {
   guitarAudio3Instance.play()
   bassAudio3Instance.play()
   drumsAudio3Instance.play()
   drumsKickAudio3Instance.play()
+  setDefaultVolume(0.5)
 }
 /**
  * START
  */
 const start = () => {
-  setDefaultVolume(0.5)
 
   playSound1()
 }
