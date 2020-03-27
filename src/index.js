@@ -333,7 +333,7 @@ unmuteSound.addEventListener("mouseleave", () => {
 
 muteSound.addEventListener("click", () => {
   isMuted = false
-  setDefaultVolume(0.5, currentSoundPlayed)
+  setDefaultVolume(1, currentSoundPlayed)
   muteSound.classList.add("hidden")
   unmuteSound.classList.remove("hidden")
 })
@@ -389,6 +389,24 @@ sounds.forEach(_sound => {
       if (hasSlide === false) {
         boxSlide()
       }
+    } else if(_sound.getAttribute("data-value") == "sound1" && isMuted){
+      currentSoundPlayed = 1
+      stopAllSound()
+      playSound1()
+      originalSlide()
+      setDefaultVolume(0, currentSoundPlayed)
+    }else if(_sound.getAttribute("data-value") == "sound2" && isMuted){
+      currentSoundPlayed = 2
+      stopAllSound()
+      playSound2()
+      originalSlide()
+      setDefaultVolume(0, currentSoundPlayed)
+    }else if(_sound.getAttribute("data-value") == "sound3" && isMuted){
+      currentSoundPlayed = 3
+      stopAllSound()
+      playSound3()
+      boxSlide()
+      setDefaultVolume(0, currentSoundPlayed)
     }
   })
 })
