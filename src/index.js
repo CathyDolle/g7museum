@@ -1,6 +1,5 @@
 import "./style/main.styl"
 import * as THREE from "three"
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import Piano from "./javascript/Piano.js"
 import Guitar from "./javascript/Guitar.js"
 import Box from "./javascript/Box.js"
@@ -10,7 +9,6 @@ import { TweenLite, TimelineMax } from "gsap/all"
 
 import { Mesh, Group } from "three"
 import startWebsite from "./javascript/Start.js"
-import font from "three/examples/fonts/helvetiker_bold.typeface.json"
 
 /**
  * Sounds1
@@ -196,12 +194,6 @@ renderer.gammaFactor = 2.2
 
 const canvasContainer = document.querySelector(".canvas-js")
 canvasContainer.appendChild(renderer.domElement)
-/**
- * Camera Controls
- */
-const cameraControls = new OrbitControls(camera, renderer.domElement)
-cameraControls.zoomSpeed = 0.3
-cameraControls.enableDamping = true
 
 /**
  * Resize
@@ -615,7 +607,6 @@ const raycaster = new THREE.Raycaster()
 
 const loop = () => {
   window.requestAnimationFrame(loop)
-  cameraControls.update()
 
   //Add text
 
